@@ -1,0 +1,204 @@
+<!-- filepath: /d:/my-node-project/public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>occci 🔥🔥🔥</title>
+    <link href="/styles/tailwind.css" rel="stylesheet" />
+    <link href="./styles/index.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="bg-gray-800 text-white p-4 header">
+      <nav class="nav-container">
+        <div>
+          <a href="/" class="text-2xl font-bold"> Movie Watch </a>
+        </div>
+        <div class="top-menu">
+          <a href="/" class="p-2">Home</a>
+          <a href="/movies" class="p-2">Movies</a>
+          <a href="/about" class="p-2">Series</a>
+          <a href="/contact" class="p-2">Categories</a>
+        </div>
+        <div>
+          <form action="/movies" method="get" class="flex">
+            <input
+              type="text"
+              name="search"
+              placeholder="Search for a movie"
+              class="p-2 rounded-l"
+            />
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded-r">
+              Search
+            </button>
+          </form>
+        </div>
+      </nav>
+      <div class="gradient-line"></div>
+    </header>
+    <main class="container">
+      <div class="image-container">
+        <img
+          src="https://image.tmdb.org/t/p/w1280//4cp40IyTpFfsT2IKpl0YlUkMBIR.jpg"
+          alt="Movie Watch"
+          class="w-full"
+        />
+      </div>
+      <!-- tittle, rating, release date, overview, ontop of the image -->
+      <div class="image-info">
+        <h1 class="text-4xl font-bold">Manchester by the Sea</h1>
+        <div class="flex items-center">
+          <div class="rating flex items-center image-text-data justify-center">
+            <svg
+              width="32px"
+              height="32px"
+              viewBox="0 0 0.7 0.68"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.318 0.031a0.02 0.02 0 0 0 -0.036 0L0.2 0.197l-0.183 0.027a0.02 0.02 0 0 0 -0.011 0.034l0.132 0.129 -0.031 0.182a0.02 0.02 0 0 0 0.029 0.021L0.3 0.504l0.164 0.086a0.02 0.02 0 0 0 0.029 -0.021l-0.031 -0.182 0.132 -0.129a0.02 0.02 0 0 0 -0.011 -0.034l-0.183 -0.027z"
+                fill="#FFD700"
+              />
+            </svg>
+
+            <span class="ml-2 font-bold">8.1</span>
+          </div>
+          <span class="image-text-data">|</span>
+          <div class="release-date image-text-data">2024</div>
+        </div>
+        <p class="text-lg mt-4">
+          A depressed uncle is asked to take care of his teenage nephew after
+          the boy's father dies. Directed by Kenneth Lonergan. Starring Casey
+          Affleck, Michelle Williams, Kyle Chandler.
+        </p>
+      </div>
+      <!-- gradient line -->
+      <div class="gradient-line-middle"></div>
+      <!-- movie carousel -->
+       <div class="movie-caraousel">
+        <h2 class="text-3xl font-bold">Similar Movies</h2>
+        <div class="movie-caraousel-container">
+          
+        </div>
+        <h2 class="text-3xl font-bold">Recently Added</h2>
+        <div class="movie-caraousel-container-featured">
+          
+        </div>
+    </main>
+    <template id="movie-card-template">
+      <div class="movie-card">
+        <img src="" alt="" class="w-full" />
+        <h3 class="text-lg font-bold mt-2"></h3>
+        <div class="flex items-center">
+          <span class="movie-card-text"></span>
+        </div>
+      </div>
+    </template>
+    <script src="bundle.js"></script>
+    <script>
+      // on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        const movieCardTemplate = document.getElementById("movie-card-template");
+        const movieCaraouselContainer = document.querySelector(
+          ".movie-caraousel-container"
+        );
+        const movieCaraouselContainerFeatured = document.querySelector(
+          ".movie-caraousel-container-featured"
+        );
+        const movies = [
+          {
+            title: "The Shawshank Redemption",
+            rating: 9.3,
+            releaseDate: 1994,
+            image:
+              "https://image.tmdb.org/t/p/w1280//q6y0Go1tsGEs6jGyG8aCv3dE6Y5.jpg",
+            Imdb: "tt0111161",
+          },
+          {
+            title: "The Godfather",
+            rating: 9.2,
+            releaseDate: 1972,
+            image:
+              "https://image.tmdb.org/t/p/w1280//3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+            Imdb: "tt0068646",
+          },
+          {
+            title: "The Dark Knight",
+            rating: 9.0,
+            releaseDate: 2008,
+            image:
+              "https://image.tmdb.org/t/p/w1280//qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+            Imdb: "tt0468569",
+          },
+          {
+            title: "The Godfather: Part II",
+            rating: 9.0,
+            releaseDate: 1974,
+            image:
+              "https://image.tmdb.org/t/p/w1280//hek3kodX2kZlY5RmUT1p4zKzRgZ.jpg",
+            Imdb: "tt0071562",
+          },
+          {
+            title: "The Lord of the Rings: The Return of the King",
+            rating: 8.9,
+            releaseDate: 2003,
+            image:
+              "https://image.tmdb.org/t/p/w1280//rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
+          },
+          {
+            title: "Pulp Fiction",
+            rating: 8.9,
+            releaseDate: 1994,
+            image:
+              "https://image.tmdb.org/t/p/w1280//dM2w364MScsjFf8pfMbaWUcWrR.jpg",
+          },
+          {
+            title: "Schindler's List",
+            rating: 8.9,
+            releaseDate: 1993,
+            image:
+              "https://image.tmdb.org/t/p/w1280//sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg",
+          },
+          {
+            title: "The Lord of the Rings: The Fellowship of the Ring",
+            rating: 8.8,
+            releaseDate: 2001,
+            image:
+              "https://image.tmdb.org/t/p/w1280//56zTpe2xvaA4alU51sRWPoKPYZy.jpg",
+          },
+          {
+            title: "Forrest Gump",
+            rating: 8.8,
+            releaseDate: 1994,
+            image:
+              "https://image.tmdb.org/t/p/w1280//clolk7rB5lAjs41SD0Vt6IXYLMm.jpg",
+          },
+          {
+            title: "Inception",
+            rating: 8.8,
+            releaseDate: 2010,
+            image:
+              "https://image.tmdb.org/t/p/w1280//9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+          }
+        ];
+
+        movies.forEach((movie) => {
+          const movieCard = movieCardTemplate.content.cloneNode(true);
+          movieCard.querySelector("img").src = movie.image;
+          movieCard.querySelector("h3").textContent = movie.title;
+          movieCard.querySelector(".movie-card-text").textContent = `${movie.rating} | ${movie.releaseDate}`;
+          movieCaraouselContainer.appendChild(movieCard);
+        });
+
+        movies.forEach((movie) => {
+          const movieCard = movieCardTemplate.content.cloneNode(true);
+          movieCard.querySelector("img").src = movie.image;
+          movieCard.querySelector("h3").textContent = movie.title;
+          movieCard.querySelector(".movie-card-text").textContent = `${movie.rating} | ${movie.releaseDate}`;
+          movieCaraouselContainerFeatured.appendChild(movieCard);
+        });
+      });
+    </script>
+  </body>
+</html>
