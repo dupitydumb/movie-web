@@ -1,10 +1,14 @@
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/client.ts",
+  entry: {
+    index: "./src/client.ts",
+    watch: "./src/watch.ts",
+  },
   output: {
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "public"),
     library: "MyLibrary",
     libraryTarget: "var",
@@ -12,12 +16,18 @@ module.exports = {
   mode: "development",
   resolve: {
     extensions: [".ts", ".js"],
-    fallback: {
-      stream: require.resolve("stream-browserify"),
-      buffer: require.resolve("buffer"),
-      process: require.resolve("process/browser"),
-    },
+    fallback: {},
   },
+  externals: {
+    express: "express",
+  },
+  plugins: [
+    new NodePolyfillPlugin(),
+    new webpack.ContextReplacementPlugin(
+      /express\/lib/,
+      path.resolve(__dirname, "node_modules")
+    ),
+  ],
   module: {
     rules: [
       {
@@ -28,12 +38,6 @@ module.exports = {
     ],
   },
   devServer: {
-    static: {
-      directory: path.join(__dirname, "public"),
-    },
-    compress: true,
-    port: 9000,
-    hot: true,
+    // ...existing code...
   },
-  plugins: [new NodePolyfillPlugin()],
 };

@@ -20,7 +20,7 @@
           <a href="/about" class="p-2">Series</a>
           <a href="/contact" class="p-2">Categories</a>
         </div>
-        <div>
+        <div class="search-form">
           <form action="/movies" method="get" class="flex">
             <input
               type="text"
@@ -28,25 +28,26 @@
               placeholder="Search for a movie"
               class="p-2 rounded-l"
             />
-            <button type="submit" class="bg-blue-500 text-white p-2 rounded-r">
-              Search
-            </button>
           </form>
+          <svg width="32px" height="32px" viewBox="0 0 0.96 0.5" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><path d="M0.61 0a0.33 0.33 0 0 0 -0.247 0.549L0.04 0.915l0.045 0.04 0.322 -0.365A0.33 0.33 0 1 0 0.61 0zm0 0.6a0.27 0.27 0 1 1 0 -0.54 0.27 0.27 0 0 1 0 0.54"/></svg>
         </div>
       </nav>
       <div class="gradient-line"></div>
     </header>
     <main class="container">
       <div class="image-container">
-        <img
-          src="https://image.tmdb.org/t/p/w1280//4cp40IyTpFfsT2IKpl0YlUkMBIR.jpg"
-          alt="Movie Watch"
-          class="w-full"
-        />
+        <button id='image-prev' class="prev">&#10094;</button>
+        <div class="slides">
+          <img src="https://image.tmdb.org/t/p/w1280//4cp40IyTpFfsT2IKpl0YlUkMBIR.jpg" class="slide" alt="Image 1">
+          <img src="https://image.tmdb.org/t/p/w1280//nv5wwZou159v5OC61i4ElR7OqyY.jpg" class="slide" alt="Image 2">
+          <img src="https://image.tmdb.org/t/p/w1280//tElnmtQ6yz1PjN1kePNl8yMSb59.jpg" class="slide" alt="Image 3">
+          <!-- Add more images as needed -->
+        </div>
+        <button id='image-next' class="next">&#10095;</button>
       </div>
       <!-- tittle, rating, release date, overview, ontop of the image -->
       <div class="image-info">
-        <h1 class="text-4xl font-bold">Manchester by the Sea</h1>
+        <h1 id='caraousel-title' class="text-4xl font-bold">Manchester by the Sea</h1>
         <div class="flex items-center">
           <div class="rating flex items-center image-text-data justify-center">
             <svg
@@ -62,12 +63,12 @@
               />
             </svg>
 
-            <span class="ml-2 font-bold">8.1</span>
+            <span id='caraousel-rating' class="ml-2 font-bold">8.1</span>
           </div>
           <span class="image-text-data">|</span>
-          <div class="release-date image-text-data">2024</div>
+          <div id='caraousel-year' class="release-date image-text-data">2024</div>
         </div>
-        <p class="text-lg mt-4">
+        <p class="text-lg mt-4" id='caraousel-description'>
           A depressed uncle is asked to take care of his teenage nephew after
           the boy's father dies. Directed by Kenneth Lonergan. Starring Casey
           Affleck, Michelle Williams, Kyle Chandler.
@@ -95,7 +96,7 @@
         </div>
       </div>
     </template>
-    <script src="bundle.js"></script>
+    <script src="index.bundle.js"></script>
     <script>
       // on page load
       document.addEventListener("DOMContentLoaded", () => {
