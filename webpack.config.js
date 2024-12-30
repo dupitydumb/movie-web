@@ -1,11 +1,13 @@
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: {
     index: "./src/client.ts",
     watch: "./src/watch.ts",
+    search: "./src/search.ts",
   },
   output: {
     filename: "[name].bundle.js",
@@ -17,6 +19,9 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".js"],
     fallback: {},
+    alias: {
+      process: "process/browser",
+    },
   },
   externals: {
     express: "express",
@@ -27,6 +32,12 @@ module.exports = {
       /express\/lib/,
       path.resolve(__dirname, "node_modules")
     ),
+    new Dotenv({
+      path: "./.env", // Path to .env file (this is the default)
+    }),
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+    }),
   ],
   module: {
     rules: [

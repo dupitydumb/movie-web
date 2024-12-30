@@ -100,11 +100,18 @@
   align-items: center; /* Center vertically */
   text-align: center; /* Center text inside the element */
   border: seashell 1px solid;
-  width: 5rem;
+  max-width: 10rem;
   height: 2rem;
   border-radius: 8px; /* Optional: Add rounded corners */
   background-color: #141d3d; /* Optional: Add background color */
   /* postition to the bottom */
-  position: absolute;
-  bottom: -235px;
+  margin-right: 0.8rem;
+  padding: 10px;
+}
+
+.genre-container {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-top: 1rem;
 }

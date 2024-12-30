@@ -27,7 +27,8 @@
         <div class="movie-player" class="mt-4">
           <!-- Movie player or iframe can be embedded here -->
           <iframe
-            src="https://player.autoembed.cc/embed/movie/tt3359350"
+            id="movie-player"
+            src=""
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -44,19 +45,27 @@
       <div class="movie-info mt-4">
         <div class="movie-info-item flex">
           <img
+            id="movie-info-img"
             src="https://image.tmdb.org/t/p/w1280//4cp40IyTpFfsT2IKpl0YlUkMBIR.jpg"
             class="movie-image"
             alt="Image 1"
           />
           <div class="movie-info-text">
-            <h1 class="text-4xl font-bold">Manchester by the Sea</h1>
-            <span class="text-2xl">Rating: 8.1</span>
-            <span class="text-2xl">Release Date: 2016-11-18</span>
-            <p class="text-lg movie-info-description">
+            <h1 id="movie-info-title" class="text-4xl font-bold">
+              Manchester by the Sea
+            </h1>
+            <span id="movie-info-rating" class="text-2xl">Rating: 8.1</span>
+            <span id="movie-info-date" class="text-2xl"
+              >Release Date: 2016-11-18</span
+            >
+            <p
+              id="movie-info-description"
+              class="text-lg movie-info-description"
+            >
               An depressed uncle is asked to take care of his teenage nephew
             </p>
-            <div class="genre-container">
-              <span class="genre">Drama</span>
+            <div class="genre-container" id="genre-container">
+              <span id="movie-info-genre" class="genre">Drama</span>
             </div>
           </div>
         </div>

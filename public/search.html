@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Watch Movie</title>
+    <link href="/styles/tailwind.css" rel="stylesheet" />
+    <link href="./styles/index.css" rel="stylesheet" />
+    <link href="./styles/search.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="bg-gray-800 text-white p-4 header">
+      <nav class="nav-container">
+        <div>
+          <a href="/" class="text-2xl font-bold">Movie Watch</a>
+        </div>
+        <div class="top-menu">
+          <a href="/" class="p-2">Home</a>
+          <a href="/movies" class="p-2">Movies</a>
+          <a href="/about" class="p-2">Series</a>
+          <a href="/contact" class="p-2">Categories</a>
+        </div>
+      </nav>
+    </header>
+    <main class="container-results">
+      <div class="search-header">
+        <h1 class="text-4xl font-bold">Search Results</h1>
+        <p class="text-lg">Showing search results for "movie"</p>
+      </div>
+      <div id="search-results" class="search-results">
+        <!-- Search results will be displayed here use the template below -->
+      </div>
+    </main>
+    <template id="movie-card-template">
+      <div class="movie-card">
+        <img
+          src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"
+          alt=""
+          class="w-full"
+          id="movie-image"
+          onclick="window.location.href = '/watch'"
+        />
+        <h3 class="text-lg font-bold mt-2"></h3>
+        <div class="flex items-center">
+          <a href="/watch" class="watch-button" id="movie-card-title">Watch</a>
+        </div>
+      </div>
+    </template>
+    <script src="search.bundle.js"></script>
+  </body>
+</html>

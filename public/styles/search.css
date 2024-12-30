@@ -1,0 +1,22 @@
+.search-results {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.container-results {
+  margin-left: 10rem;
+  margin-right: 10rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.watch-button {
+  color: white;
+  /* prevernt text overflow */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
