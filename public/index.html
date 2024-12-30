@@ -38,16 +38,16 @@
       <div class="image-container">
         <button id='image-prev' class="prev">&#10094;</button>
         <div class="slides">
-          <img src="https://image.tmdb.org/t/p/w1280//4cp40IyTpFfsT2IKpl0YlUkMBIR.jpg" class="slide" alt="Image 1">
-          <img src="https://image.tmdb.org/t/p/w1280//nv5wwZou159v5OC61i4ElR7OqyY.jpg" class="slide" alt="Image 2">
-          <img src="https://image.tmdb.org/t/p/w1280//tElnmtQ6yz1PjN1kePNl8yMSb59.jpg" class="slide" alt="Image 3">
+          <img id='caraousel-image-1' src="https://image.tmdb.org/t/p/w1280//4cp40IyTpFfsT2IKpl0YlUkMBIR.jpg" class="slide" alt="Image 1">
+          <img id='caraousel-image-2' src="https://image.tmdb.org/t/p/w1280//nv5wwZou159v5OC61i4ElR7OqyY.jpg" class="slide" alt="Image 2">
+          <img id='caraousel-image-3' src="https://image.tmdb.org/t/p/w1280//tElnmtQ6yz1PjN1kePNl8yMSb59.jpg" class="slide" alt="Image 3">
           <!-- Add more images as needed -->
         </div>
         <button id='image-next' class="next">&#10095;</button>
       </div>
       <!-- tittle, rating, release date, overview, ontop of the image -->
       <div class="image-info">
-        <h1 id='caraousel-title' class="text-4xl font-bold">Manchester by the Sea</h1>
+        <h1 id='caraousel-title' class="text-4xl font-bold"></h1>
         <div class="flex items-center">
           <div class="rating flex items-center image-text-data justify-center">
             <svg
@@ -63,27 +63,24 @@
               />
             </svg>
 
-            <span id='caraousel-rating' class="ml-2 font-bold">8.1</span>
+            <span id='caraousel-rating' class="ml-2 font-bold"></span>
           </div>
           <span class="image-text-data">|</span>
-          <div id='caraousel-year' class="release-date image-text-data">2024</div>
+          <div id='caraousel-year' class="release-date image-text-data"></div>
         </div>
         <p class="text-lg mt-4" id='caraousel-description'>
-          A depressed uncle is asked to take care of his teenage nephew after
-          the boy's father dies. Directed by Kenneth Lonergan. Starring Casey
-          Affleck, Michelle Williams, Kyle Chandler.
         </p>
       </div>
       <!-- gradient line -->
       <div class="gradient-line-middle"></div>
       <!-- movie carousel -->
        <div class="movie-caraousel">
-        <h2 class="text-3xl font-bold">Similar Movies</h2>
-        <div class="movie-caraousel-container">
+        <h2 class="text-3xl font-bold">Popular Movies</h2>
+        <div class="movie-caraousel-container" id="movie-caraousel-popular">
           
         </div>
-        <h2 class="text-3xl font-bold">Recently Added</h2>
-        <div class="movie-caraousel-container-featured">
+        <h2 class="text-3xl font-bold">Now Playing</h2>
+        <div class="movie-caraousel-container-featured" id="movie-caraousel-playing">
           
         </div>
     </main>
@@ -97,109 +94,5 @@
       </div>
     </template>
     <script src="index.bundle.js"></script>
-    <script>
-      // on page load
-      document.addEventListener("DOMContentLoaded", () => {
-        const movieCardTemplate = document.getElementById("movie-card-template");
-        const movieCaraouselContainer = document.querySelector(
-          ".movie-caraousel-container"
-        );
-        const movieCaraouselContainerFeatured = document.querySelector(
-          ".movie-caraousel-container-featured"
-        );
-        const movies = [
-          {
-            title: "The Shawshank Redemption",
-            rating: 9.3,
-            releaseDate: 1994,
-            image:
-              "https://image.tmdb.org/t/p/w1280//q6y0Go1tsGEs6jGyG8aCv3dE6Y5.jpg",
-            Imdb: "tt0111161",
-          },
-          {
-            title: "The Godfather",
-            rating: 9.2,
-            releaseDate: 1972,
-            image:
-              "https://image.tmdb.org/t/p/w1280//3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
-            Imdb: "tt0068646",
-          },
-          {
-            title: "The Dark Knight",
-            rating: 9.0,
-            releaseDate: 2008,
-            image:
-              "https://image.tmdb.org/t/p/w1280//qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-            Imdb: "tt0468569",
-          },
-          {
-            title: "The Godfather: Part II",
-            rating: 9.0,
-            releaseDate: 1974,
-            image:
-              "https://image.tmdb.org/t/p/w1280//hek3kodX2kZlY5RmUT1p4zKzRgZ.jpg",
-            Imdb: "tt0071562",
-          },
-          {
-            title: "The Lord of the Rings: The Return of the King",
-            rating: 8.9,
-            releaseDate: 2003,
-            image:
-              "https://image.tmdb.org/t/p/w1280//rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
-          },
-          {
-            title: "Pulp Fiction",
-            rating: 8.9,
-            releaseDate: 1994,
-            image:
-              "https://image.tmdb.org/t/p/w1280//dM2w364MScsjFf8pfMbaWUcWrR.jpg",
-          },
-          {
-            title: "Schindler's List",
-            rating: 8.9,
-            releaseDate: 1993,
-            image:
-              "https://image.tmdb.org/t/p/w1280//sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg",
-          },
-          {
-            title: "The Lord of the Rings: The Fellowship of the Ring",
-            rating: 8.8,
-            releaseDate: 2001,
-            image:
-              "https://image.tmdb.org/t/p/w1280//56zTpe2xvaA4alU51sRWPoKPYZy.jpg",
-          },
-          {
-            title: "Forrest Gump",
-            rating: 8.8,
-            releaseDate: 1994,
-            image:
-              "https://image.tmdb.org/t/p/w1280//clolk7rB5lAjs41SD0Vt6IXYLMm.jpg",
-          },
-          {
-            title: "Inception",
-            rating: 8.8,
-            releaseDate: 2010,
-            image:
-              "https://image.tmdb.org/t/p/w1280//9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
-          }
-        ];
-
-        movies.forEach((movie) => {
-          const movieCard = movieCardTemplate.content.cloneNode(true);
-          movieCard.querySelector("img").src = movie.image;
-          movieCard.querySelector("h3").textContent = movie.title;
-          movieCard.querySelector(".movie-card-text").textContent = `${movie.rating} | ${movie.releaseDate}`;
-          movieCaraouselContainer.appendChild(movieCard);
-        });
-
-        movies.forEach((movie) => {
-          const movieCard = movieCardTemplate.content.cloneNode(true);
-          movieCard.querySelector("img").src = movie.image;
-          movieCard.querySelector("h3").textContent = movie.title;
-          movieCard.querySelector(".movie-card-text").textContent = `${movie.rating} | ${movie.releaseDate}`;
-          movieCaraouselContainerFeatured.appendChild(movieCard);
-        });
-      });
-    </script>
   </body>
 </html>

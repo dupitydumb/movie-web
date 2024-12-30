@@ -36,11 +36,13 @@
         </div>
       </div>
       <div class="server-container">
-        <div class="movie-server-buttons">
-          <button class="server-button">Server 1</button>
-          <button class="server-button">Server 2</button>
-          <button class="server-button">Server 3</button>
-        </div>
+        <span class="text-2xl"
+          >please change server if the video is not working or wrong</span
+        >
+        <span class="text-lg"
+          >Some of these sever has ads, install adblocks</span
+        >
+        <div class="movie-server-buttons" id="movie-server-buttons"></div>
       </div>
       <div class="movie-info mt-4">
         <div class="movie-info-item flex">
@@ -54,19 +56,43 @@
             <h1 id="movie-info-title" class="text-4xl font-bold">
               Manchester by the Sea
             </h1>
-            <span id="movie-info-rating" class="text-2xl">Rating: 8.1</span>
-            <span id="movie-info-date" class="text-2xl"
-              >Release Date: 2016-11-18</span
-            >
+            <div class="flex rating-date" id="movie-info-rating-container">
+              <svg
+                width="16px"
+                height="16px"
+                viewBox="0 0 0.7 0.40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0.318 0.031a0.02 0.02 0 0 0 -0.036 0L0.2 0.197l-0.183 0.027a0.02 0.02 0 0 0 -0.011 0.034l0.132 0.129 -0.031 0.182a0.02 0.02 0 0 0 0.029 0.021L0.3 0.504l0.164 0.086a0.02 0.02 0 0 0 0.029 -0.021l-0.031 -0.182 0.132 -0.129a0.02 0.02 0 0 0 -0.011 -0.034l-0.183 -0.027z"
+                  fill="#FFD700"
+                />
+              </svg>
+              <span id="movie-info-rating" class="text-2xl">Rating: 8.1</span>
+              <svg
+                width="16px"
+                height="32px"
+                viewBox="-0.02 0 0.6 1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill="#ffffff"
+                  fill-rule="evenodd"
+                  d="M0 0.08C0 0.058 0.018 0.04 0.04 0.04h0.479C0.542 0.04 0.56 0.058 0.56 0.08v0.479C0.56 0.582 0.542 0.6 0.52 0.6H0.04C0.018 0.6 0 0.582 0 0.56zM0.04 0.2h0.48v0.36H0.04zM0.12 0.02c0 -0.011 0.009 -0.02 0.02 -0.02h0.04C0.191 0 0.2 0.009 0.2 0.02V0.04H0.12zm0.24 0c0 -0.011 0.009 -0.02 0.02 -0.02h0.04c0.011 0 0.02 0.009 0.02 0.02V0.04H0.36z"
+                />
+              </svg>
+              <span id="movie-info-date" class="text-2xl"
+                >Release Date: 2016-11-18</span
+              >
+            </div>
             <p
               id="movie-info-description"
               class="text-lg movie-info-description"
             >
               An depressed uncle is asked to take care of his teenage nephew
             </p>
-            <div class="genre-container" id="genre-container">
-              <span id="movie-info-genre" class="genre">Drama</span>
-            </div>
+            <div class="genre-container" id="genre-container"></div>
           </div>
         </div>
       </div>
