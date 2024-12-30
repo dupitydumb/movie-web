@@ -4,7 +4,6 @@ body {
   color: whitesmoke;
   /* unscrollable */
   overflow-x: hidden;
-  padding-bottom: 10rem;
 }
 
 .search-form svg {
@@ -169,6 +168,13 @@ button[type="submit"]:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
   text-shadow: -3px 9px 21px rgba(0, 0, 0, 0.86);
+  cursor: pointer;
+}
+
+.image-info h1:hover {
+  /* scale text on hover */
+  transform: scale(1.1);
+  transition: transform 0.5s;
 }
 
 .image-info p {
@@ -275,6 +281,10 @@ button[type="submit"]:hover {
   border-radius: 10px;
 }
 
+.gap {
+  gap: 1rem;
+}
+
 .movie-card {
   cursor: pointer;
   position: relative;
@@ -319,10 +329,15 @@ button[type="submit"]:hover {
   gap: 1rem;
 }
 
-.movie-caraousel-container-featured {
+.movie-caraousel-container-place {
   display: flex;
   overflow-x: auto;
   gap: 1rem;
+}
+
+.movie-caraousel-container div {
+  /* hide horizontal scrollbar */
+  scrollbar-width: none;
 }
 
 header {
@@ -347,4 +362,16 @@ header {
 ::-webkit-scrollbar-thumb {
   border-radius: 16px;
   background: #5ca6d1;
+}
+
+footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #0c216b;
+  color: whitesmoke;
+  text-align: center;
+  padding: 10px;
+  z-index: 10;
+  padding-bottom: 1rem;
 }

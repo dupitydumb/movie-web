@@ -74,16 +74,32 @@
       <!-- gradient line -->
       <div class="gradient-line-middle"></div>
       <!-- movie carousel -->
-       <div class="movie-caraousel">
+       <div class="movie-caraousel" id="movie-caraousel">
         <h2 class="text-3xl font-bold">Popular Movies</h2>
-        <div class="movie-caraousel-container" id="movie-caraousel-popular">
-          
+        <div class="movie-caraousel-container">
+          <button id='image-prev-movie' class="prev-popular"
+          onclick="prevSlide('movie-caraousel-popular')"
+          >&#10094;</button>
+          <div class="movie-caraousel-container" id="movie-caraousel-popular">
+          </div>
+          <button id='image-next-movie' class="next-popular"
+          onclick="nextSlide('movie-caraousel-popular')"
+          >&#10095;</button>
         </div>
         <h2 class="text-3xl font-bold">Now Playing</h2>
-        <div class="movie-caraousel-container-featured" id="movie-caraousel-playing">
-          
+        <div class="movie-caraousel-container">
+          <button id='image-prev-movie' class="prev-popular"
+          onclick="prevSlide('movie-caraousel-playing')">&#10094;</button>
+          <div class="movie-caraousel-container" id="movie-caraousel-playing">
+          </div>
+          <button id='image-next-movie' class="next-popular"
+          onclick="nextSlide('movie-caraousel-playing')">&#10095;</button>
         </div>
+        <!-- movie carousel end -->
+        <!-- footer end -->
     </main>
+    <footer>
+    </footer>
     <template id="movie-card-template">
       <div class="movie-card">
         <img src="" alt="" class="w-full" />
@@ -93,6 +109,31 @@
         </div>
       </div>
     </template>
+    <template id="movie-caraousel-template">
+        <h2 class="text-3xl font-bold">Now Playing</h2>
+        <div class="movie-caraousel-container">
+          <button id='image-prev-movie' class="prev-popular"
+          onclick="prevSlide('movie-caraousel-playing')">&#10094;</button>
+          <div class="movie-caraousel-container-place flex gap" id="movie-caraousel-playing">
+          </div>
+          <button id='image-next-movie' class="next-popular"
+          onclick="nextSlide('movie-caraousel-playing')">&#10095;</button>
+        </div>
+    </template>
     <script src="index.bundle.js"></script>
+    <script>
+      function nextSlide(id) {
+      const container = document.getElementById(id);
+        if (container) {
+          container.scrollBy({ left: 200, behavior: "smooth" });
+        }
+      }
+      function prevSlide(id) {
+        const container = document.getElementById(id);
+        if (container) {
+          container.scrollBy({ left: -200, behavior: "smooth" });
+        }
+      }
+    </script>
   </body>
 </html>

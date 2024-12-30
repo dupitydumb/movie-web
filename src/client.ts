@@ -1,53 +1,8 @@
 import e from "express";
 import { MovieCard } from "./MovieCard";
 
-export class MovieCarousel {
-  container: HTMLElement;
-
-  constructor(container: HTMLElement) {
-    this.container = container;
-  }
-
-  init(
-    movies: { title: string; imageUrl: string; releaseDate: string }[]
-  ): void {
-    movies.forEach((movie) => {
-      const movieCard = new MovieCard(
-        movie.title,
-        movie.imageUrl,
-        movie.releaseDate
-      );
-      this.container.appendChild(movieCard.render());
-    });
-  }
-}
-
 let currentSlide = 0;
 let slideData: any;
-//event onload
-window.addEventListener("load", () => {
-  console.log("Hello from client.ts");
-  searchPopularMovies();
-  searchPlayingMovies();
-  //Init Next and Prev buttons carousel
-  const nextButton = document.getElementById("image-next") as HTMLElement;
-  const prevButton = document.getElementById("image-prev") as HTMLElement;
-
-  nextButton.addEventListener("click", () => {
-    changeSlide(1);
-  });
-
-  prevButton.addEventListener("click", () => {
-    changeSlide(-1);
-  });
-
-  // click next button every 5 seconds
-  setInterval(() => {
-    changeSlide(1);
-  }, 15000);
-});
-
-//array of movies genres and ids
 let moviesgenre = [
   {
     id: 28,
@@ -126,6 +81,41 @@ let moviesgenre = [
     name: "Western",
   },
 ];
+
+let randomgenre: any;
+//event onload
+window.addEventListener("load", () => {
+  console.log("Hello from client.ts");
+  searchPopularMovies();
+  searchPlayingMovies();
+  //Init Next and Prev buttons carousel
+  const nextButton = document.getElementById("image-next") as HTMLElement;
+  const prevButton = document.getElementById("image-prev") as HTMLElement;
+  const nextMoviedisplay = document.querySelectorAll(
+    ".image-next-movie"
+  ) as NodeListOf<HTMLElement>;
+  const prevMoviedisplay = document.querySelectorAll(
+    ".image-prev-movie"
+  ) as NodeListOf<HTMLElement>;
+
+  nextButton.addEventListener("click", () => {
+    changeSlide(1);
+  });
+
+  prevButton.addEventListener("click", () => {
+    changeSlide(-1);
+  });
+
+  // click next button every 5 seconds
+  setInterval(() => {
+    changeSlide(1);
+  }, 15000);
+  generateTrendingCarousel();
+  //generate all genres
+  moviesgenre.forEach((element) => {
+    generateMovieCarousel(element.id);
+  });
+});
 
 function showSlide(index: number) {
   const slides = document.querySelectorAll(".slide");
@@ -363,4 +353,188 @@ function setSlideData(data: any) {
   } else {
     console.error("Element not found");
   }
+}
+
+async function generateMovieCarousel(id: number) {
+  console.log("generateMovieCarousel", id);
+  const caraouselTemplate = document.getElementById(
+    "movie-caraousel-template"
+  ) as HTMLTemplateElement;
+  const carouselParent = document.getElementById("movie-caraousel");
+  const genreName = moviesgenre.find((genre) => genre.id === id);
+  if (caraouselTemplate) {
+    const url = `https://api.themoviedb.org/3/discover/movie?with_genres=${id}&language=en-US&page=1`;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_API_KEY}` /* process.env.TMDB_API_KEY */,
+      },
+    };
+
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => {
+        const movies = json.results;
+        //make new carousel from template
+        const carousel = caraouselTemplate.content.cloneNode(
+          true
+        ) as HTMLElement;
+
+        const carouselTitle = carousel.querySelector("h2") as HTMLElement;
+        const carouselContainer = carousel.querySelector(
+          ".movie-caraousel-container-place"
+        ) as HTMLElement;
+        //change carouselcontainer id to genre name
+        carouselContainer.id = "movie-caraousel-container-" + genreName?.name;
+        const carouselButtonNextMovie = carousel.querySelector(
+          ".next-popular"
+        ) as HTMLElement;
+        const carouselButtonPrevMovie = carousel.querySelector(
+          ".prev-popular"
+        ) as HTMLElement;
+
+        if (carouselTitle) {
+          carouselTitle.textContent = genreName?.name || "";
+        }
+        if (carouselContainer) {
+          displayMovieTo(carouselContainer, movies);
+        }
+        if (carouselParent) {
+          carouselParent.appendChild(carousel);
+        }
+
+        console.log("carouselContainer", carouselContainer);
+        console.log("next", carouselButtonNextMovie);
+        console.log("prev", carouselButtonPrevMovie);
+        if (carouselButtonNextMovie) {
+          //change innerHTML onclick event to genre name
+          carouselButtonNextMovie.setAttribute(
+            "onclick",
+            `nextSlide("movie-caraousel-container-${genreName?.name}")`
+          );
+        } else {
+          console.error("Element not found next ");
+        }
+        if (carouselButtonPrevMovie) {
+          //change innerHTML onclick event to genre name
+          carouselButtonPrevMovie.setAttribute(
+            "onclick",
+            `prevSlide("movie-caraousel-container-${genreName?.name}")`
+          );
+        } else {
+          console.error("Element not found prev ");
+        }
+      })
+      .catch((err) => console.error(err));
+  }
+}
+
+async function generateTrendingCarousel() {
+  const caraouselTemplate = document.getElementById(
+    "movie-caraousel-template"
+  ) as HTMLTemplateElement;
+  const carouselParent = document.getElementById("movie-caraousel");
+  if (caraouselTemplate) {
+    const url = `https://api.themoviedb.org/3/trending/movie/day?language=en-US`;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_API_KEY}` /* process.env.TMDB_API_KEY */,
+      },
+    };
+
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => {
+        const movies = json.results;
+        //make new carousel from template
+        const carousel = caraouselTemplate.content.cloneNode(
+          true
+        ) as HTMLElement;
+
+        const carouselTitle = carousel.querySelector("h2") as HTMLElement;
+        const carouselContainer = carousel.querySelector(
+          ".movie-caraousel-container-place"
+        ) as HTMLElement;
+        //change carouselcontainer id to genre name
+        carouselContainer.id = "movie-caraousel-container-" + "trending";
+        const carouselButtonNextMovie = carousel.querySelector(
+          ".next-popular"
+        ) as HTMLElement;
+        const carouselButtonPrevMovie = carousel.querySelector(
+          ".prev-popular"
+        ) as HTMLElement;
+
+        if (carouselTitle) {
+          carouselTitle.textContent = "Trending";
+        }
+        if (carouselContainer) {
+          displayMovieTo(carouselContainer, movies);
+        }
+        if (carouselParent) {
+          carouselParent.appendChild(carousel);
+        }
+
+        console.log("carouselContainer", carouselContainer);
+        console.log("next", carouselButtonNextMovie);
+        console.log("prev", carouselButtonPrevMovie);
+        if (carouselButtonNextMovie) {
+          //change innerHTML onclick event to genre name
+          carouselButtonNextMovie.setAttribute(
+            "onclick",
+            `nextSlide("movie-caraousel-container-trending")`
+          );
+        } else {
+          console.error("Element not found next ");
+        }
+        if (carouselButtonPrevMovie) {
+          //change innerHTML onclick event to genre name
+          carouselButtonPrevMovie.setAttribute(
+            "onclick",
+            `prevSlide("movie-caraousel-container-trending")`
+          );
+        } else {
+          console.error("Element not found prev ");
+        }
+      })
+      .catch((err) => console.error(err));
+  }
+}
+
+function displayMovieTo(carouselContainer: HTMLElement, movie: any) {
+  console.log("displayMovieTo", movie);
+  const cardTemplate = document.getElementById(
+    "movie-card-template"
+  ) as HTMLTemplateElement;
+  movie.forEach((movie: any) => {
+    const card = cardTemplate.content.cloneNode(true) as HTMLElement;
+    const image = card.querySelector("img") as HTMLImageElement;
+    const title = card.querySelector("a") as HTMLAnchorElement;
+    if (image) {
+      image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+      image.alt = movie.original_title;
+      //add onclick event to image
+      image.onclick = () => {
+        window.location.href = `/watch?title=${movie.title}&id=${movie.id}`;
+      };
+      image.onerror = () => {
+        image.src = "https://via.placeholder.com/500x750";
+      };
+    }
+    if (title) {
+      title.textContent = movie.original_title;
+    }
+    if (carouselContainer) {
+      carouselContainer.appendChild(card);
+    }
+    //image href to watch page
+    if (title) {
+      // change the title to the movie title
+      title.textContent = movie.original_title;
+      // add href to the title
+      title.href = `/watch?title=${movie.title}&id=${movie.id}`;
+    }
+  });
 }
