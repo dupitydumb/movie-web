@@ -36,8 +36,16 @@ async function searchMovies(query: string) {
     .then((json) => (console.log(json), (moviedata = json)))
     .then(() => {
       displayMovies();
+      setHeader(query);
     })
     .catch((err) => console.error(err));
+}
+
+function setHeader(query: string) {
+  const header = document.getElementById("search-query");
+  if (header) {
+    header.textContent = "Showing search results for " + query;
+  }
 }
 
 function displayMovies() {
@@ -56,7 +64,7 @@ function displayMovies() {
       image.alt = movie.original_title;
       //add onclick event to image
       image.onclick = () => {
-        window.location.href = `/watch?title=${movie.title}&id=${movie.id}`;
+        window.location.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
       };
       image.onerror = () => {
         image.src = "https://via.placeholder.com/500x750";
@@ -73,7 +81,7 @@ function displayMovies() {
       // change the title to the movie title
       title.textContent = movie.original_title;
       // add href to the title
-      title.href = `/watch?title=${movie.title}&id=${movie.id}`;
+      title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
     }
   });
 }
