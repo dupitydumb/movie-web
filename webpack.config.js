@@ -32,9 +32,7 @@ module.exports = {
       /express\/lib/,
       path.resolve(__dirname, "node_modules")
     ),
-    new Dotenv({
-      path: "./.env", // Path to .env file (this is the default)
-    }),
+    new Dotenv({ systemvars: true }),
     new webpack.ProvidePlugin({
       process: "process/browser",
     }),
