@@ -86,6 +86,9 @@ let randomgenre: any;
 //event onload
 window.addEventListener("load", () => {
   console.log("Hello from client.ts");
+
+  //log environment variable
+  console.log(process.env.TMDB_API_KEY);
   searchPopularMovies();
   searchPlayingMovies();
   //Init Next and Prev buttons carousel
