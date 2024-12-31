@@ -145,7 +145,7 @@ function showSlide(index: number) {
 
       //make tittle clickable
       slidestitle.onclick = () => {
-        window.location.href = `/watch?title=${slideData[currentSlide].title}&id=${slideData[currentSlide].id}`;
+        window.location.href = `/watch.html?title=${slideData[currentSlide].title}&id=${slideData[currentSlide].id}`;
       };
     } else {
       console.error("slideData is undefined");
@@ -217,7 +217,7 @@ function displayPopularMovies() {
       image.alt = movie.original_title;
       //add onclick event to image
       image.onclick = () => {
-        window.location.href = `/watch?title=${movie.title}&id=${movie.id}`;
+        window.location.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
       };
       image.onerror = () => {
         image.src = "https://via.placeholder.com/500x750";
@@ -234,7 +234,7 @@ function displayPopularMovies() {
       // change the title to the movie title
       title.textContent = movie.original_title;
       // add href to the title
-      title.href = `/watch?title=${movie.title}&id=${movie.id}`;
+      title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
     }
   });
 }
@@ -253,7 +253,7 @@ function displayPlaying() {
       image.alt = movie.original_title;
       //add onclick event to image
       image.onclick = () => {
-        window.location.href = `/watch?title=${movie.title}&id=${movie.id}`;
+        window.location.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
       };
       image.onerror = () => {
         image.src = "https://via.placeholder.com/500x750";
@@ -270,7 +270,7 @@ function displayPlaying() {
       // change the title to the movie title
       title.textContent = movie.original_title;
       // add href to the title
-      title.href = `/watch?title=${movie.title}&id=${movie.id}`;
+      title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
     }
   });
 }
@@ -517,7 +517,7 @@ function displayMovieTo(carouselContainer: HTMLElement, movie: any) {
       image.alt = movie.original_title;
       //add onclick event to image
       image.onclick = () => {
-        window.location.href = `/watch?title=${movie.title}&id=${movie.id}`;
+        window.location.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
       };
       image.onerror = () => {
         image.src = "https://via.placeholder.com/500x750";
@@ -534,7 +534,7 @@ function displayMovieTo(carouselContainer: HTMLElement, movie: any) {
       // change the title to the movie title
       title.textContent = movie.original_title;
       // add href to the title
-      title.href = `/watch?title=${movie.title}&id=${movie.id}`;
+      title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
     }
   });
 }
