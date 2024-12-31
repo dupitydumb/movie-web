@@ -37,6 +37,7 @@ function init() {
     console.error("Movie not found");
   }
   generateServer();
+  generateRecomendations();
 }
 
 let moviedata: any;
@@ -58,6 +59,7 @@ async function fetchMovie(movieId: string) {
     .then((json) => (console.log(json), (moviedata = json)))
     .then(() => {
       updateMovieInfo();
+      getSameGenreMovies();
     })
     .catch((err) => console.error(err));
 
@@ -94,7 +96,7 @@ function updateMovieInfo() {
   if (genreparent) {
     //get the first 3 genres, duplicate genreElement and append to genresElement
     const genres = moviedata.genres;
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < genres.length; i++) {
       //create a new span element
       const genreElement = document.createElement("span");
       genreElement.textContent = genres[i].name;
@@ -173,4 +175,129 @@ function generateServer() {
   buttons[0].classList.add("selected");
 
   console.log("finished generating server buttons");
+}
+
+let recomendations: any;
+async function generateRecomendations() {
+  const url = `https://api.themoviedb.org/3/movie/${movieID}/recommendations?language=en-US&page=1`;
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${process.env.TMDB_API_KEY}` /* process.env.TMDB_API_KEY */,
+    },
+  };
+
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((json) => (console.log(json), (recomendations = json)))
+    .then(() => {
+      displayRecomendations();
+    })
+    .catch((err) => console.error(err));
+
+  console.log("finished generating recomendations");
+}
+
+function displayRecomendations() {
+  const movieCardTemplate = document.getElementById(
+    "movie-card-template"
+  ) as HTMLTemplateElement;
+  const movieCardContainer = document.getElementById(
+    "movie-caraousel-recommendation"
+  ) as HTMLDivElement;
+
+  if (movieCardTemplate)
+    recomendations.results.forEach((movie: any) => {
+      const card = movieCardTemplate.content.cloneNode(true) as HTMLElement;
+      const image = card.querySelector("img") as HTMLImageElement;
+      const title = card.querySelector("a") as HTMLAnchorElement;
+      if (image) {
+        image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+        image.alt = movie.original_title;
+        //add onclick event to image
+        image.onclick = () => {
+          window.location.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
+        };
+        image.onerror = () => {
+          image.src = "https://via.placeholder.com/500x750";
+        };
+      }
+      if (title) {
+        title.textContent = movie.original_title;
+      }
+      if (movieCardContainer) {
+        movieCardContainer.appendChild(card);
+      }
+      //image href to watch page
+      if (title) {
+        // change the title to the movie title
+        title.textContent = movie.original_title;
+        // add href to the title
+        title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
+      }
+    });
+}
+
+async function getSameGenreMovies() {
+  const genres = moviedata.genres;
+  console.log("genres: ", genres);
+  const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genres[0].id}`;
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${process.env.TMDB_API_KEY}` /* process.env.TMDB_API_KEY */,
+    },
+  };
+  console.log("getting same genre movies with id " + moviedata.genres[0].id);
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((json) => (console.log(json), (sameGenreMovies = json)))
+    .then(() => {
+      displayMovieTo("movie-caraousel-same-genre", sameGenreMovies);
+    })
+    .catch((err) => console.error(err));
+}
+
+let sameGenreMovies: any;
+
+function displayMovieTo(carouselContainer: string, movie: any) {
+  const movieCardTemplate = document.getElementById(
+    "movie-card-template"
+  ) as HTMLTemplateElement;
+  const movieCardContainer = document.getElementById(
+    carouselContainer
+  ) as HTMLDivElement;
+
+  if (movieCardTemplate)
+    movie.results.forEach((movie: any) => {
+      const card = movieCardTemplate.content.cloneNode(true) as HTMLElement;
+      const image = card.querySelector("img") as HTMLImageElement;
+      const title = card.querySelector("a") as HTMLAnchorElement;
+      if (image) {
+        image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+        image.alt = movie.original_title;
+        //add onclick event to image
+        image.onclick = () => {
+          window.location.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
+        };
+        image.onerror = () => {
+          image.src = "https://via.placeholder.com/500x750";
+        };
+      }
+      if (title) {
+        title.textContent = movie.original_title;
+      }
+      if (movieCardContainer) {
+        movieCardContainer.appendChild(card);
+      }
+      //image href to watch page
+      if (title) {
+        // change the title to the movie title
+        title.textContent = movie.original_title;
+        // add href to the title
+        title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
+      }
+    });
 }

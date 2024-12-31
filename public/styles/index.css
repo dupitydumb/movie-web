@@ -375,3 +375,16 @@ footer {
   z-index: 10;
   padding-bottom: 1rem;
 }
+
+.logo-title {
+  font-family: "Oswald", serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #800e0e;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(173, 23, 23, 0.1);
+}

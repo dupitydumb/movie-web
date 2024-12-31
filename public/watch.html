@@ -7,12 +7,18 @@
     <link href="/styles/tailwind.css" rel="stylesheet" />
     <link href="./styles/index.css" rel="stylesheet" />
     <link href="./styles/watch.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header class="bg-gray-800 text-white p-4 header">
       <nav class="nav-container">
         <div>
-          <a href="/" class="text-2xl font-bold">Movie Watch</a>
+          <a href="/" class="text-2xl font-bold logo-title">MyFlixed</a>
         </div>
         <div class="top-menu">
           <a href="/" class="p-2">Home</a>
@@ -96,7 +102,76 @@
           </div>
         </div>
       </div>
+      <div class="recommendation-container" id="recommendation-container">
+        <h2 class="text-3xl font-bold">Recomendation</h2>
+        <div class="movie-caraousel-container">
+          <button
+            id="image-prev-movie"
+            class="prev-popular"
+            onclick="prevSlide('movie-caraousel-recommendation')"
+          >
+            &#10094;
+          </button>
+          <div
+            class="movie-caraousel-container"
+            id="movie-caraousel-recommendation"
+          ></div>
+          <button
+            id="image-next-movie"
+            class="next-popular"
+            onclick="nextSlide('movie-caraousel-recommendation')"
+          >
+            &#10095;
+          </button>
+        </div>
+      </div>
+      <div class="recommendation-container" id="recommendation-container">
+        <h2 class="text-3xl font-bold">Same Genre</h2>
+        <div class="movie-caraousel-container">
+          <button
+            id="image-prev-movie"
+            class="prev-popular"
+            onclick="prevSlide('movie-caraousel-same-genre')"
+          >
+            &#10094;
+          </button>
+          <div
+            class="movie-caraousel-container"
+            id="movie-caraousel-same-genre"
+          ></div>
+          <button
+            id="image-next-movie"
+            class="next-popular"
+            onclick="nextSlide('movie-caraousel-same-genre')"
+          >
+            &#10095;
+          </button>
+        </div>
+      </div>
     </main>
+    <template id="movie-card-template">
+      <div class="movie-card">
+        <img src="" alt="" class="w-full" />
+        <h3 class="text-lg font-bold mt-2"></h3>
+        <div class="flex items-center">
+          <span class="movie-card-text"></span>
+        </div>
+      </div>
+    </template>
     <script src="watch.bundle.js"></script>
+    <script>
+      function nextSlide(id) {
+        const container = document.getElementById(id);
+        if (container) {
+          container.scrollBy({ left: 200, behavior: "smooth" });
+        }
+      }
+      function prevSlide(id) {
+        const container = document.getElementById(id);
+        if (container) {
+          container.scrollBy({ left: -200, behavior: "smooth" });
+        }
+      }
+    </script>
   </body>
 </html>

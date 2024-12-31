@@ -127,3 +127,23 @@ button.selected {
 .rating-date svg {
   margin-right: 0.2rem;
 }
+
+.movie-caraousel-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+}
+
+.recommendation-container {
+  width: 100%;
+  margin-top: 1rem;
+  background-color: #141d3d;
+  border-radius: 16px;
+  padding: 0.5rem;
+  display: grid;
+  height: auto;
+}
+.recommendation-container h2 {
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
