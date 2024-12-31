@@ -1,4 +1,4 @@
-import e from "express";
+import e, { json } from "express";
 import { MovieCard } from "./MovieCard";
 
 let currentSlide = 0;
@@ -108,6 +108,9 @@ window.addEventListener("load", () => {
   prevButton.addEventListener("click", () => {
     changeSlide(-1);
   });
+
+  //get country of the user
+  getmoviecountry("ID");
 
   // click next button every 5 seconds
   setInterval(() => {
@@ -284,6 +287,29 @@ function compareData(data: any, data2: any) {
     (item: any) => !data.some((other: any) => item.id === other.id)
   );
   return filteredData;
+}
+
+async function getmoviecountry(country: string) {
+  const container = document.getElementById(
+    "movie-caraousel-country"
+  ) as HTMLElement;
+  let moviedatacountry: any;
+  const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=revenue.desc&with_origin_country=${country}`;
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${process.env.TMDB_API_KEY}` /* process.env.TMDB_API_KEY */,
+    },
+  };
+
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((json) => (moviedatacountry = json))
+    .then(() => {
+      displayMovieTo(container, moviedatacountry.results);
+    })
+    .catch((err) => console.error(err));
 }
 
 function setSlideData(data: any) {

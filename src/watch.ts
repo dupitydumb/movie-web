@@ -30,7 +30,7 @@ function init() {
       "movie-player"
     ) as HTMLIFrameElement;
     if (playerContainer) {
-      playerContainer.src = `https://player.autoembed.cc/embed/movie/${movieId}`;
+      playerContainer.src = `https://vidlink.pro/movie/${movieID}`;
     }
   } else {
     main.innerHTML = "<h1>Movie not found</h1>";
@@ -115,6 +115,11 @@ function generateServer() {
   console.log("generating server buttons with movieID: ", movieID);
   //list of providers name and their corresponding link
   let providers = [
+    {
+      name: "VidLink",
+      url: `https://vidlink.pro/movie/${movieID}`,
+      recommended: true,
+    },
     {
       name: "Autoembed",
       url: `https://player.autoembed.cc/embed/movie/${movieID}`,
