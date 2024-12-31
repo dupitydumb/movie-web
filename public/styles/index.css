@@ -1,5 +1,5 @@
 /* For small screens (mobile devices) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 992px) {
   /* Add styles for small screens here */
   body {
     background-color: #0d1531;
@@ -94,11 +94,6 @@
     border-radius: 5px; /* Rounded corners */
     padding: 5px;
   }
-}
-
-/* For medium screens (tablets) */
-@media only screen and (min-width: 601px) and (max-width: 992px) {
-  /* Add styles for medium screens here */
 }
 
 /* For large screens (desktops) */

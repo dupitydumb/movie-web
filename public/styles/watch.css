@@ -1,5 +1,5 @@
 /* For small screens (mobile devices) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 992px) {
   .mt-2 {
     margin-top: 0.5rem;
   }
@@ -160,14 +160,6 @@
   .prev-popular,
   .next-popular {
     display: none;
-  }
-}
-
-/* For medium screens (tablets) */
-@media only screen and (min-width: 601px) and (max-width: 992px) {
-  .movie-caraousel {
-    flex-direction: row;
-    flex-wrap: wrap;
   }
 }
 
