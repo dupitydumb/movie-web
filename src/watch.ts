@@ -104,6 +104,9 @@ function updateMovieInfo() {
       genreparent.appendChild(genreElement);
     }
   }
+
+  //change page title
+  document.title = "Watch " + moviedata.original_title;
 }
 
 function generateServer() {
