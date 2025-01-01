@@ -85,10 +85,6 @@ let moviesgenre = [
 let randomgenre: any;
 //event onload
 window.addEventListener("load", () => {
-  console.log("Hello from client.ts");
-
-  //log environment variable
-  console.log(process.env.TMDB_API_KEY);
   searchPopularMovies();
   searchPlayingMovies();
   //Init Next and Prev buttons carousel
@@ -131,7 +127,6 @@ function showSlide(index: number) {
     index = slides.length - 1;
   }
   currentSlide = index;
-  console.log("showSlide", currentSlide);
   const offset = -currentSlide * 100;
   const slidesElement = document.querySelector(".slides") as HTMLElement;
   if (slidesElement) {
@@ -319,7 +314,6 @@ function setSlideData(data: any) {
       .sort(() => Math.random() - 0.5)
       .slice(0, 3);
     slideData = randomMovies;
-    console.log(slideData);
   } else {
     console.error("Data or data.results is undefined");
   }
@@ -385,7 +379,6 @@ function setSlideData(data: any) {
 }
 
 async function generateMovieCarousel(id: number) {
-  console.log("generateMovieCarousel", id);
   const caraouselTemplate = document.getElementById(
     "movie-caraousel-template"
   ) as HTMLTemplateElement;
@@ -432,10 +425,6 @@ async function generateMovieCarousel(id: number) {
         if (carouselParent) {
           carouselParent.appendChild(carousel);
         }
-
-        console.log("carouselContainer", carouselContainer);
-        console.log("next", carouselButtonNextMovie);
-        console.log("prev", carouselButtonPrevMovie);
         if (carouselButtonNextMovie) {
           //change innerHTML onclick event to genre name
           carouselButtonNextMovie.setAttribute(
@@ -505,10 +494,6 @@ async function generateTrendingCarousel() {
         if (carouselParent) {
           carouselParent.appendChild(carousel);
         }
-
-        console.log("carouselContainer", carouselContainer);
-        console.log("next", carouselButtonNextMovie);
-        console.log("prev", carouselButtonPrevMovie);
         if (carouselButtonNextMovie) {
           //change innerHTML onclick event to genre name
           carouselButtonNextMovie.setAttribute(
@@ -533,7 +518,6 @@ async function generateTrendingCarousel() {
 }
 
 function displayMovieTo(carouselContainer: HTMLElement, movie: any) {
-  console.log("displayMovieTo", movie);
   const cardTemplate = document.getElementById(
     "movie-card-template"
   ) as HTMLTemplateElement;

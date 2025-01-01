@@ -51,6 +51,13 @@
     gtag("js", new Date());
 
     gtag("config", "G-8W9BTGW9WB");
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieTitle = urlParams.get("title");
+    gtag("event", "page_view", {
+      page_title: movieTitle,
+      page_location: window.location.href,
+    });
   </script>
   <body>
     <header class="bg-gray-800 text-white p-4 header">
@@ -210,6 +217,11 @@
           container.scrollBy({ left: -200, behavior: "smooth" });
         }
       }
+
+      //wait until all the content is loaded
+      window.onload = function () {
+        //get the movie id
+      };
     </script>
   </body>
 </html>

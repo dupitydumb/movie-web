@@ -3,14 +3,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Hello from watch.ts");
   init();
 });
 
 let movieID: any;
 
 function init() {
-  console.log("initing watch.ts");
   const urlParams = new URLSearchParams(window.location.search);
   const movieTitle = urlParams.get("title");
   const movieId = urlParams.get("id");
@@ -24,7 +22,6 @@ function init() {
   }
 
   if (movieId) {
-    console.log("Movie ID: ", movieId);
     fetchMovie(movieId);
     const playerContainer = document.getElementById(
       "movie-player"
@@ -34,7 +31,6 @@ function init() {
     }
   } else {
     main.innerHTML = "<h1>Movie not found</h1>";
-    console.error("Movie not found");
   }
   generateServer();
   generateRecomendations();
@@ -42,9 +38,6 @@ function init() {
 
 let moviedata: any;
 async function fetchMovie(movieId: string) {
-  //debug the environment variable
-  console.log(process.env.TMDB_API_KEY);
-
   const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
   const options = {
     method: "GET",
@@ -56,18 +49,15 @@ async function fetchMovie(movieId: string) {
 
   fetch(url, options)
     .then((res) => res.json())
-    .then((json) => (console.log(json), (moviedata = json)))
+    .then((json) => (moviedata = json))
     .then(() => {
       updateMovieInfo();
       getSameGenreMovies();
     })
     .catch((err) => console.error(err));
-
-  console.log("finished fetching movie data");
 }
 
 function updateMovieInfo() {
-  console.log(moviedata);
   const titleElement = document.getElementById("movie-info-title");
   const posterElement = document.getElementById(
     "movie-info-img"
@@ -115,7 +105,6 @@ function generateServer() {
   const playerContainer = document.getElementById(
     "movie-player"
   ) as HTMLIFrameElement;
-  console.log("generating server buttons with movieID: ", movieID);
   //list of providers name and their corresponding link
   let providers = [
     {
@@ -181,8 +170,6 @@ function generateServer() {
     button.classList.remove("selected");
   });
   buttons[0].classList.add("selected");
-
-  console.log("finished generating server buttons");
 }
 
 let recomendations: any;
@@ -198,13 +185,11 @@ async function generateRecomendations() {
 
   fetch(url, options)
     .then((res) => res.json())
-    .then((json) => (console.log(json), (recomendations = json)))
+    .then((json) => (recomendations = json))
     .then(() => {
       displayRecomendations();
     })
     .catch((err) => console.error(err));
-
-  console.log("finished generating recomendations");
 }
 
 function displayRecomendations() {
@@ -249,7 +234,6 @@ function displayRecomendations() {
 
 async function getSameGenreMovies() {
   const genres = moviedata.genres;
-  console.log("genres: ", genres);
   const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genres[0].id}`;
   const options = {
     method: "GET",
@@ -258,10 +242,9 @@ async function getSameGenreMovies() {
       Authorization: `Bearer ${process.env.TMDB_API_KEY}` /* process.env.TMDB_API_KEY */,
     },
   };
-  console.log("getting same genre movies with id " + moviedata.genres[0].id);
   fetch(url, options)
     .then((res) => res.json())
-    .then((json) => (console.log(json), (sameGenreMovies = json)))
+    .then((json) => (sameGenreMovies = json))
     .then(() => {
       displayMovieTo("movie-caraousel-same-genre", sameGenreMovies);
     })
