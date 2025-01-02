@@ -70,6 +70,19 @@
       <div class="gradient-line"></div>
     </header>
     <main class="container">
+      <div class="welcome-container">
+        <h1 class="welcome-title">Welcome to MyFlixed</h1>
+        <p class="welcome-text">
+          Watch your favorite movies and TV shows online for free. No subscription fees, and no credit cards.
+        </p>
+        <!-- adblock message -->
+        <p class="welcome-text font-bold">
+          Please use adblock to disable ads on this website. for android user, you can use Firefox browser with adblock extension.
+        </p>
+        <button class="welcome-button" 
+        onclick="hideElement('.welcome-container')"
+        >Watch Now</button>
+      </div>
       <div class="image-container">
         <button id='image-prev' class="prev">&#10094;</button>
         <div class="slides">
@@ -202,6 +215,13 @@
         const container = document.getElementById(id);
         if (container) {
           container.scrollBy({ left: -200, behavior: "smooth" });
+        }
+      }
+
+      function hideElement(className) {
+        const element = document.querySelector(className);
+        if (element) {
+          element.style.display = "none";
         }
       }
     </script>

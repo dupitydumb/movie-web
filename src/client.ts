@@ -85,6 +85,18 @@ let moviesgenre = [
 let randomgenre: any;
 //event onload
 window.addEventListener("load", () => {
+  const warningText = document.querySelector(
+    ".welcome-container"
+  ) as HTMLElement;
+
+  //get data from local storage if user has visited the site before
+  if (localStorage.getItem("visited") === "true") {
+    warningText.style.display = "none";
+  } else {
+    warningText.style.display = "visible";
+    localStorage.setItem("visited", "true");
+  }
+
   searchPopularMovies();
   searchPlayingMovies();
   //Init Next and Prev buttons carousel
