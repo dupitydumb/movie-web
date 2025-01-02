@@ -132,11 +132,11 @@ function displayMovies() {
     movieInfoRating.textContent = movie.vote_average.toFixed(1);
     if (movie.first_air_date) {
       movieType.textContent = "TV";
-      movieInfoTitle.textContent = movie.original_name;
+      movieInfoTitle.textContent = movie.name || movie.original_name;
     }
     if (movie.release_date) {
       movieType.textContent = "Movie";
-      movieInfoTitle.textContent = movie.original_title;
+      movieInfoTitle.textContent = movie.title || movie.original_title;
     }
     if (resultsContainer && isImage && movie.poster_path) {
       resultsContainer.appendChild(card);

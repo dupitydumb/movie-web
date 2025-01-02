@@ -17,7 +17,6 @@
     /* keep aspect ratio */
     position: relative;
     height: 20rem;
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -88,7 +87,7 @@
     max-width: 50vw;
   }
 
-  .movie-info {
+  .movie-info-watch {
     border-radius: 16px;
     background-color: #141d3d;
     margin-top: 1rem;
@@ -373,7 +372,7 @@
     text-align: center;
   }
 
-  .movie-info {
+  .movie-info-watch {
     border-radius: 16px;
     background-color: #141d3d;
     margin-top: 1rem;
