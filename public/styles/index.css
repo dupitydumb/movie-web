@@ -101,6 +101,18 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .movie-info {
+    display: none;
+  }
+
+  .categories {
+    display: none;
+  }
+
+  .warning-container {
+    display: none;
+  }
 }
 
 /* For large screens (desktops) */

@@ -14,7 +14,9 @@
   }
 
   .movie-player {
-    width: 100%;
+    /* keep aspect ratio */
+    position: relative;
+    height: 20rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

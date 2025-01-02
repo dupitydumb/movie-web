@@ -96,8 +96,30 @@
       <div class="movie-card">
         <img src="" alt="" class="w-full" />
         <h3 class="text-lg font-bold mt-2"></h3>
-        <div class="flex items-center">
-          <span class="movie-card-text"></span>
+        <div class="flex flex-col movie-info">
+          <div class="gradient-movie"></div>
+          <span class="movie-card-text" id="movie-title"> Venom 2 </span>
+          <div class="detail-info flex">
+            <span class="movie-card-text movie-type" id="movie-type"
+              >Movie</span
+            >
+            <div class="movie-card-rating flex items-center">
+              <svg
+                fill="#FFD700"
+                width="24px"
+                height="24px"
+                viewBox="0 0 0.96 1.1"
+                version="1.2"
+                baseProfile="tiny"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m0.374 0.366 -0.211 0.023c-0.008 0.001 -0.014 0.006 -0.017 0.014s0 0.016 0.006 0.021c0.063 0.057 0.157 0.143 0.157 0.143 0 0 -0.026 0.125 -0.043 0.208a0.02 0.02 0 0 0 0.029 0.021c0.074 -0.042 0.184 -0.105 0.184 -0.105l0.184 0.105c0.007 0.004 0.015 0.004 0.022 -0.001a0.02 0.02 0 0 0 0.008 -0.02l-0.043 -0.208 0.157 -0.143a0.02 0.02 0 0 0 -0.011 -0.035c-0.084 -0.009 -0.211 -0.023 -0.211 -0.023l-0.087 -0.193a0.02 0.02 0 0 0 -0.036 0z"
+                />
+              </svg>
+              <span id="movie-card-rating" class="font-bold">5</span>
+            </div>
+          </div>
         </div>
       </div>
     </template>

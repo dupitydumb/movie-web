@@ -107,6 +107,13 @@ function displayMovies() {
     const card = cardTemplate.content.cloneNode(true) as HTMLElement;
     const image = card.querySelector("img") as HTMLImageElement;
     const title = card.querySelector("a") as HTMLAnchorElement;
+    const movieInfoTitle = card.querySelector(
+      ".movie-info span"
+    ) as HTMLElement;
+    const movieInfoRating = card.querySelector(
+      ".movie-card-rating span"
+    ) as HTMLElement;
+    const movieType = card.querySelector(".movie-type") as HTMLElement;
     if (image && movie.poster_path) {
       image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
       image.alt = movie.original_title;
@@ -122,30 +129,17 @@ function displayMovies() {
         isImage = false;
       };
     }
-    if (title) {
-      title.textContent = movie.original_title;
+    movieInfoRating.textContent = movie.vote_average.toFixed(1);
+    if (movie.first_air_date) {
+      movieType.textContent = "TV";
+      movieInfoTitle.textContent = movie.original_name;
+    }
+    if (movie.release_date) {
+      movieType.textContent = "Movie";
+      movieInfoTitle.textContent = movie.original_title;
     }
     if (resultsContainer && isImage && movie.poster_path) {
       resultsContainer.appendChild(card);
-    }
-    //image href to watch page
-    if (title) {
-      // change the title to the movie title
-      title.textContent = movie.original_title;
-      //if the movie has first_air_date, it is a tv show
-      if (movie.first_air_date) {
-        title.textContent = movie.original_name;
-        title.href = `/tv/watch.html?title=${movie.original_name}&id=${movie.id}`;
-      }
-
-      //if the movie has release_date, it is a movie
-      if (movie.release_date) {
-        title.textContent = movie.original_title
-          ? movie.original_title
-          : movie.title;
-        title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
-      }
-      // add href to the title
     }
   });
 }

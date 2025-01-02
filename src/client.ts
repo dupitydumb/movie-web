@@ -204,83 +204,17 @@ async function searchPlayingMovies() {
 }
 
 function displayPopularMovies() {
-  const resultsContainer = document.getElementById("movie-caraousel-popular");
-  const cardTemplate = document.getElementById(
-    "movie-card-template"
-  ) as HTMLTemplateElement;
-
-  popularMovies.results.forEach((movie: any) => {
-    const card = cardTemplate.content.cloneNode(true) as HTMLElement;
-    const image = card.querySelector("img") as HTMLImageElement;
-    const title = card.querySelector("a") as HTMLAnchorElement;
-    const movieInfoTitle = card.querySelector(
-      ".movie-card-text"
-    ) as HTMLElement;
-    const movieInfoRating = card.querySelector(
-      ".movie-card-rating span"
-    ) as HTMLElement;
-    const movieType = card.querySelector(".movie-type") as HTMLElement;
-    if (image) {
-      image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-      image.alt = movie.original_title;
-      //add onclick event to image
-      image.onclick = () => {
-        window.location.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
-      };
-      image.onerror = () => {
-        image.src = "https://via.placeholder.com/500x750";
-      };
-    }
-    if (title) {
-      title.textContent = movie.original_title;
-    }
-    if (resultsContainer) {
-      resultsContainer.appendChild(card);
-    }
-    //image href to watch page
-    if (title) {
-      // change the title to the movie title
-      title.textContent = movie.original_title;
-      // add href to the title
-      title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
-    }
-  });
+  const popularMoviesContainer = document.getElementById(
+    "movie-caraousel-popular"
+  ) as HTMLElement;
+  displayMovieTo(popularMoviesContainer, popularMovies.results);
 }
 
 function displayPlaying() {
-  const resultsContainer = document.getElementById("movie-caraousel-playing");
-  const cardTemplate = document.getElementById(
-    "movie-card-template"
-  ) as HTMLTemplateElement;
-  playingMovies.results.forEach((movie: any) => {
-    const card = cardTemplate.content.cloneNode(true) as HTMLElement;
-    const image = card.querySelector("img") as HTMLImageElement;
-    const title = card.querySelector("a") as HTMLAnchorElement;
-    if (image) {
-      image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-      image.alt = movie.original_title;
-      //add onclick event to image
-      image.onclick = () => {
-        window.location.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
-      };
-      image.onerror = () => {
-        image.src = "https://via.placeholder.com/500x750";
-      };
-    }
-    if (title) {
-      title.textContent = movie.original_title;
-    }
-    if (resultsContainer) {
-      resultsContainer.appendChild(card);
-    }
-    //image href to watch page
-    if (title) {
-      // change the title to the movie title
-      title.textContent = movie.original_title;
-      // add href to the title
-      title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
-    }
-  });
+  const playingMoviesContainer = document.getElementById(
+    "movie-caraousel-playing"
+  ) as HTMLElement;
+  displayMovieTo(playingMoviesContainer, playingMovies.results);
 }
 
 function compareData(data: any, data2: any) {

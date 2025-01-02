@@ -299,6 +299,13 @@ function displayMovieTo(carouselContainer: HTMLElement, movie: any) {
     const card = cardTemplate.content.cloneNode(true) as HTMLElement;
     const image = card.querySelector("img") as HTMLImageElement;
     const title = card.querySelector("a") as HTMLAnchorElement;
+    const movieInfoTitle = card.querySelector(
+      ".movie-info span"
+    ) as HTMLElement;
+    const movieInfoRating = card.querySelector(
+      ".movie-card-rating span"
+    ) as HTMLElement;
+    const movieType = card.querySelector(".movie-type") as HTMLElement;
     if (image) {
       image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
       image.alt = movie.original_title;
@@ -314,6 +321,9 @@ function displayMovieTo(carouselContainer: HTMLElement, movie: any) {
       title.textContent = movie.original_title;
     }
     if (carouselContainer) {
+      movieInfoTitle.textContent = movie.name;
+      movieInfoRating.textContent = movie.vote_average.toFixed(1);
+      movieType.textContent = "TV";
       carouselContainer.appendChild(card);
     }
     //image href to watch page
