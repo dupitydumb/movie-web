@@ -213,6 +213,13 @@ function displayPopularMovies() {
     const card = cardTemplate.content.cloneNode(true) as HTMLElement;
     const image = card.querySelector("img") as HTMLImageElement;
     const title = card.querySelector("a") as HTMLAnchorElement;
+    const movieInfoTitle = card.querySelector(
+      ".movie-card-text"
+    ) as HTMLElement;
+    const movieInfoRating = card.querySelector(
+      ".movie-card-rating span"
+    ) as HTMLElement;
+    const movieType = card.querySelector(".movie-type") as HTMLElement;
     if (image) {
       image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
       image.alt = movie.original_title;
@@ -525,6 +532,13 @@ function displayMovieTo(carouselContainer: HTMLElement, movie: any) {
     const card = cardTemplate.content.cloneNode(true) as HTMLElement;
     const image = card.querySelector("img") as HTMLImageElement;
     const title = card.querySelector("a") as HTMLAnchorElement;
+    const movieInfoTitle = card.querySelector(
+      ".movie-info span"
+    ) as HTMLElement;
+    const movieInfoRating = card.querySelector(
+      ".movie-card-rating span"
+    ) as HTMLElement;
+    const movieType = card.querySelector(".movie-type") as HTMLElement;
     if (image) {
       image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
       image.alt = movie.original_title;
@@ -542,10 +556,17 @@ function displayMovieTo(carouselContainer: HTMLElement, movie: any) {
     if (carouselContainer) {
       carouselContainer.appendChild(card);
     }
+    if (movieInfoRating) {
+      movieInfoRating.textContent = movie.vote_average.toFixed(1);
+      movieInfoTitle.textContent = movie.original_title;
+      console.log(movieInfoTitle.textContent);
+    }
     //image href to watch page
     if (title) {
       // change the title to the movie title
       title.textContent = movie.original_title;
+      movieInfoTitle.textContent = movie.original_title;
+      console.log(movieInfoTitle.textContent);
       // add href to the title
       title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
     }

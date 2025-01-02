@@ -485,17 +485,28 @@
   .movie-card {
     cursor: pointer;
     position: relative;
+    overflow-y: clip;
+  }
+
+  .movie-card:hover .movie-info {
+    /*Create transition effect of text pop up from bottom */
+    display: flex;
+  }
+
+  .movie-card .movie-info {
+    animation: slideIn 0.4s ease-out forwards;
+    /* Ensure the animation only runs once and stays in the final state */
+    animation-fill-mode: forwards;
   }
 
   .movie-card-text {
     margin-right: 1rem;
-    color: #a9a9ac;
+    font-weight: bolder;
+    z-index: 5;
   }
 
   .movie-card:hover img {
     /* darken image on hover */
-    filter: brightness(0.5);
-    border: #7a92e7 5px solid;
   }
 
   .movie-card h3 {
@@ -511,12 +522,22 @@
     animation: slideText 5s linear infinite;
   }
 
+  /* animate text pop up */
   @keyframes slideText {
     0% {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-100%);
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
     }
   }
 
@@ -584,5 +605,61 @@
     padding: 10px 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(173, 23, 23, 0.1);
+  }
+
+  .flex-col {
+    flex-direction: column;
+  }
+
+  .movie-card-text {
+    /* prevent text overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 180px;
+  }
+
+  .movie-card-rating {
+    /* make it at right*/
+    position: absolute;
+    right: 16px;
+    z-index: 5;
+  }
+  .detail-info span {
+    font-weight: lighter;
+    color: #f1f1f1;
+  }
+
+  .movie-info {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    color: white;
+    display: none;
+    transform: translateY(100%);
+    animation: slideIn 0.5s ease-in-out;
+  }
+
+  .gradient-movie {
+    overflow: hidden;
+    z-index: 1;
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) 43%,
+      rgba(0, 0, 0, 0.6867121848739496) 73%,
+      rgba(0, 0, 0, 0.3393732492997199) 89%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 }
