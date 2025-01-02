@@ -63,12 +63,6 @@
     overflow: scroll;
   }
 
-  .movie-caraousel-container-place div {
-  }
-
-  .movie-caraousel-container div {
-  }
-
   .search-form {
     display: none;
   }
@@ -166,7 +160,7 @@
   }
 
   .image-container {
-    margin-top: -5rem;
+    margin-top: -8rem;
     min-width: 100vw;
     display: flex;
     justify-content: center;
