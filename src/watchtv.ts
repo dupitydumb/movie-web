@@ -73,7 +73,7 @@ function updateMovieInfo() {
   const genreparent = document.getElementById("genre-container");
 
   if (titleElement) {
-    titleElement.textContent = moviedata.original_name;
+    titleElement.textContent = moviedata.name;
   }
   if (posterElement) {
     posterElement.src = `https://image.tmdb.org/t/p/w500${moviedata.poster_path}`;
@@ -101,7 +101,7 @@ function updateMovieInfo() {
   }
 
   //change page title
-  document.title = "Watch " + moviedata.original_title;
+  document.title = "Watch " + moviedata.name;
 }
 
 let providers = [
@@ -294,8 +294,19 @@ function displaySeasons() {
     displayEpisodes(fullseasonjson[seasonDropdown.selectedIndex]);
   });
 
-  //display the first season by default
-  displayEpisodes(fullseasonjson[0]);
+  //set the first season as selected by default
+  if (seasonDropdown) {
+    // if specials exist, select it by default
+    if (seasonDropdown.options[0].value == "0") {
+      seasonDropdown.selectedIndex = 1;
+      displayEpisodes(fullseasonjson[1]);
+    } else {
+      seasonDropdown.selectedIndex = 0;
+      displayEpisodes(fullseasonjson[0]);
+    }
+  }
+
+  //display the first season by default, no specials
 }
 
 function displayEpisodes(seasons: any) {

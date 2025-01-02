@@ -60,9 +60,20 @@
         </div>
         <div class="top-menu">
           <a href="/" class="p-2">Home</a>
-          <a href="/movies" class="p-2">Movies</a>
-          <a href="/about" class="p-2">Series</a>
-          <a href="/contact" class="p-2">Categories</a>
+          <a href="/" class="p-2">Movies</a>
+          <a href="/series.html" class="p-2">Series</a>
+          <div class="categories">
+            <ul>
+              <li>
+                <a href="#" class="category-link">Category &dtrif;</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Drama</a></li>
+                  <li><a href="#">Comedy</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
@@ -78,13 +89,7 @@
       </div>
       <div id="search-pagination" class="search-pagination">
         <!-- Pagination will be displayed here -->
-        <div class="pagination flex" id="pagination">
-          <p>1</p>
-          <p>2</p>
-          <p>3</p>
-          <p>4</p>
-          <p>5</p>
-        </div>
+        <div class="pagination flex" id="pagination"></div>
       </div>
     </main>
     <template id="movie-card-template">

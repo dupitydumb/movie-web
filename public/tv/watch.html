@@ -69,11 +69,29 @@
           <a href="/" class="p-2">Home</a>
           <a href="/" class="p-2">Movies</a>
           <a href="/series.html" class="p-2">Series</a>
-          <a href="/" class="p-2">Categories</a>
+          <div class="categories">
+            <ul>
+              <li>
+                <a href="#" class="category-link">Category &dtrif;</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Drama</a></li>
+                  <li><a href="#">Comedy</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
     <main class="container-watch">
+      <div class="top-bar">
+        <div class="warning-container">
+          <span class="text-2xl"
+            >Refresh the page if the video is not working, new movies showing diffrent video means its not available, try another server</span
+          >
+        </div>
+      </div>
       <div id="movie-container" class="movie-container">
         <div class="movie-player" class="mt-4">
           <!-- Movie player or iframe can be embedded here -->
@@ -88,9 +106,6 @@
         </div>
       </div>
       <div class="server-container">
-        <span class="text-2xl"
-          >please change server if the video is not working or wrong</span
-        >
         <span class="text-lg"
           >Some of these sever has ads, install adblocks</span
         >

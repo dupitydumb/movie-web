@@ -54,14 +54,27 @@ async function searchMovies(query: string, page = 1) {
         pagination.innerHTML = "";
         const totalPages = Math.ceil(moviedata.results.length / 20);
         for (let i = 1; i <= totalPages; i++) {
-          const button = document.createElement("button");
+          const button = document.createElement("p");
           button.textContent = i.toString();
           button.addEventListener("click", () => {
             searchMovies(query, i);
+            window.scrollTo(0, 0);
+            //add active class to the p tag
+            const buttons = document.querySelectorAll("#pagination p");
+            buttons.forEach((button) => {
+              button.classList.remove("selected");
+            });
+            button.classList.add("selected");
           });
           pagination.appendChild(button);
         }
       }
+      //set the first page as active
+      const buttons = document.querySelectorAll("#pagination p");
+      buttons.forEach((button) => {
+        button.classList.remove("selected");
+      });
+      buttons[0].classList.add("selected");
     }
 
     console.log(moviedata);
@@ -86,12 +99,15 @@ function displayMovies() {
     "movie-card-template"
   ) as HTMLTemplateElement;
 
+  if (resultsContainer) {
+    resultsContainer.innerHTML = "";
+  }
   moviedata.results.forEach((movie: any) => {
+    let isImage = true;
     const card = cardTemplate.content.cloneNode(true) as HTMLElement;
     const image = card.querySelector("img") as HTMLImageElement;
     const title = card.querySelector("a") as HTMLAnchorElement;
-    console.log(image);
-    if (image) {
+    if (image && movie.poster_path) {
       image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
       image.alt = movie.original_title;
       //add onclick event to image
@@ -102,13 +118,14 @@ function displayMovies() {
           window.location.href = `/watch.html?title=${movie.original_title}&id=${movie.id}`;
       };
       image.onerror = () => {
-        image.src = "https://via.placeholder.com/500x750";
+        //skip if image is not found
+        isImage = false;
       };
     }
     if (title) {
       title.textContent = movie.original_title;
     }
-    if (resultsContainer) {
+    if (resultsContainer && isImage && movie.poster_path) {
       resultsContainer.appendChild(card);
     }
     //image href to watch page

@@ -14,6 +14,7 @@
   }
 
   .movie-player {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,7 +38,7 @@
     height: 5rem;
     margin-right: 1rem;
     margin-top: 1rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease;
   }
 
   .server-container span {
@@ -330,10 +331,12 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.5s ease;
   }
 
   .server-container button:hover {
     background-color: #273b85;
+    transition: background-color 0.5s ease;
   }
 
   button.selected {
@@ -455,8 +458,7 @@
     min-height: 20vh;
     user-select: none;
   }
-  .episodes-container h2 {
-  }
+
   .season-dropdown {
     /* Add your styles here */
     display: flex;
@@ -464,8 +466,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
     margin-top: 1rem;
-  }
-  .season-dropdown label {
+    /* transition */
+    transition: all 0.5s ease;
   }
   .season-dropdown select {
     width: 10vw;
@@ -492,6 +494,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 2rem;
+    /* transition */
+    transition: all 1s ease;
   }
   .episode-card {
     display: flex;
@@ -510,6 +514,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    /* transition */
+    transition: background-color 0.3s ease;
   }
   .episode-card:hover {
     background-color: #273b85;
@@ -553,5 +559,22 @@
   }
   .episode-selected {
     background-color: #273b85;
+  }
+
+  .warning-container {
+    width: 100%;
+    margin-top: 1rem;
+    background-color: #273b85;
+    border-radius: 10px;
+    padding: 0.5rem;
+    display: grid;
+    user-select: none;
+  }
+  .warning-container span {
+    font-weight: bold;
+  }
+  .warning-container h2 {
+    margin-left: 1.5rem;
+    font-weight: bold;
   }
 }

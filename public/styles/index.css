@@ -315,6 +315,10 @@
     margin-top: 0.2em;
   }
 
+  .top-menu {
+    display: inline-flex;
+  }
+
   .top-menu a {
     color: rgb(255, 255, 255);
     text-decoration: none;
@@ -323,8 +327,81 @@
       "Lucida Sans", Arial, sans-serif;
     font-weight: bolder;
     width: 40%;
-
     font-size: larger;
+    /* transition effect */
+    transition: 0.5s;
+  }
+
+  /* top menu hover animation */
+  .top-menu a:hover {
+    color: rgba(255, 255, 255, 0.664);
+    text-decoration: none;
+    padding: 10px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    font-weight: bolder;
+    width: 40%;
+    font-size: larger;
+    border-radius: 10px;
+    scale: 1.1;
+  }
+
+  .categories {
+    display: inline-block;
+    position: relative;
+    align-content: center;
+  }
+
+  .categories ul {
+    list-style: none;
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+  }
+
+  .categories li {
+    position: relative;
+    width: 100%;
+  }
+
+  .category-link {
+    text-decoration: none;
+    color: white;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #1c2c54;
+    padding: 20px;
+    display: none;
+    border-radius: 10px;
+    text-align: left;
+    width: 10rem;
+    /* transition effect */
+    transition: 0.5s;
+  }
+
+  .dropdown-menu li {
+    margin-bottom: 10px;
+  }
+
+  .dropdown-menu a {
+    text-decoration: none;
+    color: white;
+    font-weight: lighter;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    cursor: pointer;
+    /* transition effect */
+    transition: 0.5s;
+  }
+
+  .categories li:hover .dropdown-menu {
+    display: block;
+    /* transition effect */
+    transition: 0.5s;
   }
 
   .header {
@@ -401,6 +478,10 @@
     height: 270px;
     object-fit: cover;
     border-radius: 10px;
+    /* transition effect */
+    transition: 0.5s;
+    /* undraggable */
+    -webkit-user-drag: none;
   }
 
   .gap {

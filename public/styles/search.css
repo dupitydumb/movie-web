@@ -37,6 +37,50 @@
   .search-header p {
     font-size: 16px;
   }
+
+  .search-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .search-pagination button {
+    margin: 0 5px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+  }
+  .search-pagination button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  .pagination p {
+    margin: 0;
+    background-color: #273b85;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .pagination p.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .pagination p.selected {
+    background-color: #1d2955;
+    text-decoration: solid;
+  }
+
+  .pagination p:hover {
+    background-color: #1d2955;
+  }
 }
 
 /* For large screens (desktops) */
@@ -101,6 +145,7 @@
   }
   .pagination p.selected {
     background-color: #1d2955;
+    text-decoration: solid;
   }
 
   .pagination p:hover {
