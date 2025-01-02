@@ -40,9 +40,9 @@
         </div>
         <div class="top-menu">
           <a href="/" class="p-2">Home</a>
-          <a href="/" class="p-2">Movies</a>
-          <a href="/series.html" class="p-2">Series</a>
-          <a href="" class="p-2">Categories</a>
+          <a href="/movies" class="p-2">Movies</a>
+          <a href="/about" class="p-2">Series</a>
+          <a href="/contact" class="p-2">Categories</a>
         </div>
         <div class="search-form">
           <form action="/search.html" method="get" class="flex">
@@ -59,42 +59,7 @@
       <div class="gradient-line"></div>
     </header>
     <main class="container">
-      <div class="image-container">
-        <button id='image-prev' class="prev">&#10094;</button>
-        <div class="slides">
-          <img id='caraousel-image-1' src="https://image.tmdb.org/t/p/w1280//4cp40IyTpFfsT2IKpl0YlUkMBIR.jpg" class="slide" alt="Image 1">
-          <img id='caraousel-image-2' src="https://image.tmdb.org/t/p/w1280//nv5wwZou159v5OC61i4ElR7OqyY.jpg" class="slide" alt="Image 2">
-          <img id='caraousel-image-3' src="https://image.tmdb.org/t/p/w1280//tElnmtQ6yz1PjN1kePNl8yMSb59.jpg" class="slide" alt="Image 3">
-          <!-- Add more images as needed -->
-        </div>
-        <button id='image-next' class="next">&#10095;</button>
-      </div>
-      <!-- tittle, rating, release date, overview, ontop of the image -->
-      <div class="image-info">
-        <h1 id='caraousel-title' class="text-4xl font-bold"></h1>
-        <div class="flex items-center">
-          <div class="rating flex items-center image-text-data justify-center">
-            <svg
-              width="32px"
-              height="32px"
-              viewBox="0 0 0.7 0.68"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0.318 0.031a0.02 0.02 0 0 0 -0.036 0L0.2 0.197l-0.183 0.027a0.02 0.02 0 0 0 -0.011 0.034l0.132 0.129 -0.031 0.182a0.02 0.02 0 0 0 0.029 0.021L0.3 0.504l0.164 0.086a0.02 0.02 0 0 0 0.029 -0.021l-0.031 -0.182 0.132 -0.129a0.02 0.02 0 0 0 -0.011 -0.034l-0.183 -0.027z"
-                fill="#FFD700"
-              />
-            </svg>
-
-            <span id='caraousel-rating' class="ml-2 font-bold"></span>
-          </div>
-          <span class="image-text-data">|</span>
-          <div id='caraousel-year' class="release-date image-text-data"></div>
-        </div>
-        <p class="text-lg mt-4" id='caraousel-description'>
-        </p>
-      </div>
+     
       <!-- gradient line -->
       <div class="gradient-line-middle"></div>
       <div class="mobile-search-bar">
@@ -106,44 +71,13 @@
             placeholder="Search for a movie"
             class="p-2 rounded-l"
           />
-          <button type="submit">
-            &#128269;
-          </button>
+          <button type="submit">Search</button>
         </form>
         </div>
       </div>
 
       <!-- movie carousel -->
        <div class="movie-caraousel" id="movie-caraousel">
-        <h2 class="text-3xl font-bold">Popular Movies</h2>
-        <div class="movie-caraousel-container">
-          <button id='image-prev-movie' class="prev-popular"
-          onclick="prevSlide('movie-caraousel-popular')"
-          >&#10094;</button>
-          <div class="movie-caraousel-container" id="movie-caraousel-popular">
-          </div>
-          <button id='image-next-movie' class="next-popular"
-          onclick="nextSlide('movie-caraousel-popular')"
-          >&#10095;</button>
-        </div>
-        <h2 class="text-3xl font-bold">Now Playing</h2>
-        <div class="movie-caraousel-container">
-          <button id='image-prev-movie' class="prev-popular"
-          onclick="prevSlide('movie-caraousel-playing')">&#10094;</button>
-          <div class="movie-caraousel-container" id="movie-caraousel-playing">
-          </div>
-          <button id='image-next-movie' class="next-popular"
-          onclick="nextSlide('movie-caraousel-playing')">&#10095;</button>
-        </div>
-        <h2 class="text-3xl font-bold">Top 20 Indonesia</h2>
-        <div class="movie-caraousel-container">
-          <button id='image-prev-movie' class="prev-popular"
-          onclick="prevSlide('movie-caraousel-country')">&#10094;</button>
-          <div class="movie-caraousel-container" id="movie-caraousel-country">
-          </div>
-          <button id='image-next-movie' class="next-popular"
-          onclick="nextSlide('movie-caraousel-country')">&#10095;</button>
-        </div>
         <!-- movie carousel end -->
         <!-- footer end -->
     </main>
@@ -169,7 +103,7 @@
           onclick="nextSlide('movie-caraousel-playing')">&#10095;</button>
         </div>
     </template>
-    <script src="index.bundle.js"></script>
+    <script src="series.bundle.js"></script>
     <script>
       function nextSlide(id) {
       const container = document.getElementById(id);

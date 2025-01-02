@@ -29,8 +29,8 @@
     />
     <title>Watch</title>
     <link href="/styles/tailwind.css" rel="stylesheet" />
-    <link href="./styles/index.css" rel="stylesheet" />
-    <link href="./styles/watch.css" rel="stylesheet" />
+    <link href="/styles/index.css" rel="stylesheet" />
+    <link href="/styles/watch.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -67,9 +67,9 @@
         </div>
         <div class="top-menu">
           <a href="/" class="p-2">Home</a>
-          <a href="/movies" class="p-2">Movies</a>
+          <a href="/" class="p-2">Movies</a>
           <a href="/series.html" class="p-2">Series</a>
-          <a href="/contact" class="p-2">Categories</a>
+          <a href="/" class="p-2">Categories</a>
         </div>
       </nav>
     </header>
@@ -83,15 +83,28 @@
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
+            muted
           ></iframe>
         </div>
       </div>
       <div class="server-container">
         <span class="text-2xl"
-          >please change server if the video is not working or wrong, Some of
-          these sever has ads, install adblocks</span
+          >please change server if the video is not working or wrong</span
+        >
+        <span class="text-lg"
+          >Some of these sever has ads, install adblocks</span
         >
         <div class="movie-server-buttons" id="movie-server-buttons"></div>
+      </div>
+      <div class="episodes-container" id="episodes-container">
+        <!-- Dropdown for seasons -->
+        <div class="season-dropdown" id="season-dropdown">
+          <select name="season" id="season-select" class="season-select">
+            >
+          </select>
+        </div>
+        <div class="episode-grid" id="episodes"></div>
+        <div class="episodes-pagination" id="episodes-pagination"></div>
       </div>
       <div class="movie-info mt-4">
         <div class="movie-info-item flex">
@@ -145,63 +158,42 @@
           </div>
         </div>
       </div>
-      <div class="recommendation-container" id="recommendation-container">
-        <h2 class="text-3xl font-bold">Same Genre</h2>
-        <div class="movie-caraousel-container">
-          <button
-            id="image-prev-movie"
-            class="prev-popular"
-            onclick="prevSlide('movie-caraousel-same-genre')"
-          >
-            &#10094;
-          </button>
-          <div
-            class="movie-caraousel-container"
-            id="movie-caraousel-same-genre"
-          ></div>
-          <button
-            id="image-next-movie"
-            class="next-popular"
-            onclick="nextSlide('movie-caraousel-same-genre')"
-          >
-            &#10095;
-          </button>
-        </div>
+      
       </div>
-      <div class="recommendation-container" id="recommendation-container">
-        <h2 class="text-3xl font-bold">Recomendation</h2>
-        <div class="movie-caraousel-container">
-          <button
-            id="image-prev-movie"
-            class="prev-popular"
-            onclick="prevSlide('movie-caraousel-recommendation')"
-          >
-            &#10094;
-          </button>
-          <div
-            class="movie-caraousel-container"
-            id="movie-caraousel-recommendation"
-          ></div>
-          <button
-            id="image-next-movie"
-            class="next-popular"
-            onclick="nextSlide('movie-caraousel-recommendation')"
-          >
-            &#10095;
-          </button>
-        </div>
+      
       </div>
     </main>
-    <template id="movie-card-template">
-      <div class="movie-card">
-        <img src="" alt="" class="w-full" />
-        <h3 class="text-lg font-bold mt-2"></h3>
-        <div class="flex items-center">
-          <span class="movie-card-text"></span>
-        </div>
+    <template id="episode-card-template">
+      <div class="episode-card" id="episode-1">
+        <svg
+          fill="#ffffff"
+          width="32px"
+          height="32px"
+          viewBox="0 0 1.44 1.44"
+          version="1.1"
+          preserveAspectRatio="xMidYMid meet"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <title>play-solid</title>
+          <path
+            class="clr-i-solid clr-i-solid-path-1"
+            d="M1.286 0.643 0.358 0.179A0.083 0.083 0 0 0 0.24 0.253v0.928a0.082 0.082 0 0 0 0.12 0.074l0.926 -0.464a0.083 0.083 0 0 0 0 -0.148Z"
+          />
+          <path
+            x="0"
+            y="0"
+            width="36"
+            height="36"
+            fill-opacity="0"
+            d="M0 0H1.44V1.44H0V0z"
+          />
+        </svg>
+        <h3 class="episode-title">Eps 1</h3>
+        <p class="episode-description">Description</p>
       </div>
     </template>
-    <script src="watch.bundle.js"></script>
+    <script src="../watchtv.bundle.js"></script>
     <script>
       function nextSlide(id) {
         const container = document.getElementById(id);

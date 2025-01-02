@@ -21,24 +21,56 @@ function init() {
 }
 
 let moviedata: any;
-async function searchMovies(query: string) {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=true&language=en-US&page=1`;
+async function searchMovies(query: string, page = 1) {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}&sort_by=popularity.desc`;
+  const url2 = `https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US&page=${page}&sort_by=popularity.desc`;
+
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${process.env.TMDB_API_KEY}` /* process.env.TMDB_API_KEY */,
+      Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
     },
   };
 
-  fetch(url, options)
-    .then((res) => res.json())
-    .then((json) => (console.log(json), (moviedata = json)))
-    .then(() => {
-      displayMovies();
-      setHeader(query);
-    })
-    .catch((err) => console.error(err));
+  try {
+    const [movieResponse, tvResponse] = await Promise.all([
+      fetch(url, options),
+      fetch(url2, options),
+    ]);
+
+    const movieData = await movieResponse.json();
+    const tvData = await tvResponse.json();
+
+    moviedata = {
+      results: [...movieData.results, ...tvData.results],
+    };
+
+    //set pagnation if results are more than 20
+    if (moviedata.results.length > 20) {
+      const pagination = document.getElementById("pagination");
+      if (pagination) {
+        //delete all children
+        pagination.innerHTML = "";
+        const totalPages = Math.ceil(moviedata.results.length / 20);
+        for (let i = 1; i <= totalPages; i++) {
+          const button = document.createElement("button");
+          button.textContent = i.toString();
+          button.addEventListener("click", () => {
+            searchMovies(query, i);
+          });
+          pagination.appendChild(button);
+        }
+      }
+    }
+
+    console.log(moviedata);
+
+    setHeader(query);
+    displayMovies();
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 function setHeader(query: string) {
@@ -64,7 +96,10 @@ function displayMovies() {
       image.alt = movie.original_title;
       //add onclick event to image
       image.onclick = () => {
-        window.location.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
+        if (movie.first_air_date)
+          window.location.href = `/tv/watch.html?title=${movie.original_name}&id=${movie.id}`;
+        if (movie.release_date)
+          window.location.href = `/watch.html?title=${movie.original_title}&id=${movie.id}`;
       };
       image.onerror = () => {
         image.src = "https://via.placeholder.com/500x750";
@@ -80,8 +115,20 @@ function displayMovies() {
     if (title) {
       // change the title to the movie title
       title.textContent = movie.original_title;
+      //if the movie has first_air_date, it is a tv show
+      if (movie.first_air_date) {
+        title.textContent = movie.original_name;
+        title.href = `/tv/watch.html?title=${movie.original_name}&id=${movie.id}`;
+      }
+
+      //if the movie has release_date, it is a movie
+      if (movie.release_date) {
+        title.textContent = movie.original_title
+          ? movie.original_title
+          : movie.title;
+        title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
+      }
       // add href to the title
-      title.href = `/watch.html?title=${movie.title}&id=${movie.id}`;
     }
   });
 }

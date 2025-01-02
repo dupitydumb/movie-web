@@ -11,7 +11,11 @@
   }
 
   header {
-    display: none;
+    padding: 10px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 5;
   }
   .logo-title {
     font-family: "Oswald", serif;
@@ -24,6 +28,7 @@
     padding: 10px 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(173, 23, 23, 0.1);
+    text-align: center;
   }
   .image-container {
     display: none;
@@ -89,10 +94,18 @@
   .mobile-search-bar-container form input {
     width: 300px;
     /* Style the input element */
-    background-color: whitesmoke; /* Dark background color */
+    background-color: #1a1a2e; /* Dark background color */
     color: whitesmoke; /* Text color */
     border-radius: 5px; /* Rounded corners */
     padding: 5px;
+  }
+
+  .mobile-search-bar-container form button {
+    color: whitesmoke; /* Button text color */
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
   }
 }
 

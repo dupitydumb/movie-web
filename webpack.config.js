@@ -8,6 +8,8 @@ module.exports = {
     index: "./src/client.ts",
     watch: "./src/watch.ts",
     search: "./src/search.ts",
+    series: "./src/series.ts",
+    watchtv: "./src/watchtv.ts",
   },
   output: {
     filename: "[name].bundle.js",
