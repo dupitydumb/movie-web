@@ -2,7 +2,7 @@ import e, { json } from "express";
 import { MovieCard } from "./MovieCard";
 
 let currentSlide = 0;
-let slideData: any;
+let slideData: any = [];
 let moviesgenre = [
   {
     id: 28,
@@ -99,6 +99,7 @@ window.addEventListener("load", () => {
 
   searchPopularMovies();
   searchPlayingMovies();
+  getFeaturedMovies();
   //Init Next and Prev buttons carousel
   const nextButton = document.getElementById("image-next") as HTMLElement;
   const prevButton = document.getElementById("image-prev") as HTMLElement;
@@ -148,6 +149,9 @@ function showSlide(index: number) {
   const slidesDescription = document.getElementById("caraousel-description");
   const slidesReleaseDate = document.getElementById("caraousel-year");
   const slidesRating = document.getElementById("caraousel-rating");
+  const slidesLogo = document.getElementById(
+    "caraousel-logo"
+  ) as HTMLImageElement;
 
   if (slidestitle && slidesDescription && slidesReleaseDate && slidesRating) {
     if (slideData) {
@@ -155,6 +159,23 @@ function showSlide(index: number) {
       slidesDescription.textContent = slideData[currentSlide].overview;
       slidesReleaseDate.textContent = slideData[currentSlide].release_date;
       slidesRating.textContent = slideData[currentSlide].vote_average;
+
+      if (movideFeatured.movies[currentSlide].logo && slidesLogo) {
+        slidesLogo.src =
+          "https://image.tmdb.org/t/p/original" +
+          movideFeatured.movies[currentSlide].logo;
+        //hide title
+        if (slidestitle) {
+          slidestitle.style.display = "none";
+        }
+      } else {
+        if (slidesLogo) {
+          slidesLogo.style.display = "none";
+        }
+        if (slidestitle) {
+          slidestitle.style.display = "block";
+        }
+      }
 
       //make tittle clickable
       slidestitle.onclick = () => {
@@ -190,9 +211,65 @@ async function searchPopularMovies() {
     .then((json) => (popularMovies = json))
     .then(() => {
       displayPopularMovies();
-      setSlideData(popularMovies);
     })
     .catch((err) => console.error(err));
+}
+let movideFeatured: any;
+async function getFeaturedMovies() {
+  //get local data from json
+  const featureJson = await fetch("../data/featured-movies.json");
+  const featureData = await featureJson.json();
+  //select 3 random movies
+  const randomMovies = featureData.movies.sort(() => Math.random() - 0.5);
+  featureData.movies = randomMovies.slice(0, 3);
+
+  // for each movie id, get the movie data
+  featureData.movies.forEach(async (movie: any) => {
+    const url = `https://api.themoviedb.org/3/movie/${movie.id}?language=en-US`;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_API_KEY}` /* process.env.TMDB_API_KEY */,
+      },
+    };
+
+    //get logo image
+    const ulr2 = `https://api.themoviedb.org/3/movie/${movie.id}/images`;
+    const options2 = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_API_KEY}` /* process.env.TMDB_API_KEY */,
+      },
+    };
+
+    fetch(ulr2, options2)
+      .then((res) => res.json())
+      .then((json) => {
+        // add the logo image to the movie data
+        json.logos.forEach((logo: any) => {
+          if (logo.iso_639_1 === "en") {
+            movie.logo = logo.file_path;
+          }
+        });
+      });
+
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => {
+        // add the movie data to the featured movies
+        slideData.push(json);
+      })
+      .then(() => {
+        setSlideData(slideData);
+      })
+      .catch((err) => console.error(err));
+  });
+
+  console.log(slideData);
+  console.log(featureData);
+  movideFeatured = featureData;
 }
 
 async function searchPlayingMovies() {
@@ -260,18 +337,9 @@ async function getmoviecountry(country: string) {
     .catch((err) => console.error(err));
 }
 
-function setSlideData(data: any) {
+async function setSlideData(data: any) {
   //get 3 random movies
-  if (data && data.results) {
-    const randomMovies = data.results
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3);
-    slideData = randomMovies;
-  } else {
-    console.error("Data or data.results is undefined");
-  }
   showSlide(1);
-
   const carouselImage1 = document.getElementById(
     "caraousel-image-1"
   ) as HTMLImageElement;
@@ -284,38 +352,37 @@ function setSlideData(data: any) {
 
   //array of images
   const images = [carouselImage1, carouselImage2, carouselImage3];
-
+  console.log(slideData);
   if (carouselImage1 && carouselImage2 && carouselImage3) {
     carouselImage1.src = `https://image.tmdb.org/t/p/original${slideData[0].backdrop_path}`;
     carouselImage2.src = `https://image.tmdb.org/t/p/original${slideData[1].backdrop_path}`;
     carouselImage3.src = `https://image.tmdb.org/t/p/original${slideData[2].backdrop_path}`;
-    // let index = 0;
-    // // get image api
-    // images.forEach((element) => {
-    //   let imagedata: any;
-    //   const url = `https://api.themoviedb.org/3/movie/${slideData[index].id}/images`;
-    //   const options = {
-    //     method: "GET",
-    //     headers: {
-    //       accept: "application/json",
-    //       Authorization: `Bearer ${process.env.TMDB_API_KEY}` /* process.env.TMDB_API_KEY */,
-    //     },
-    //   };
-    //   fetch(url, options)
-    //     .then((res) => res.json())
-    //     .then((json) => (imagedata = json))
-    //     .then(() => {
-    //       element.src = `https://image.tmdb.org/t/p/original${imagedata.backdrops[0].file_path}`;
-    //     })
-    //     .catch((err) => console.error(err));
-    //   index++;
-    // });
   }
 
   const slidestitle = document.getElementById("caraousel-title");
   const slidesDescription = document.getElementById("caraousel-description");
   const slidesReleaseDate = document.getElementById("caraousel-year");
   const slidesRating = document.getElementById("caraousel-rating");
+  const slidesLogo = document.getElementById(
+    "caraousel-logo"
+  ) as HTMLImageElement;
+
+  //set logo image
+  if (slidesLogo && movideFeatured.movies[currentSlide].logo) {
+    slidesLogo.src = `https://image.tmdb.org/t/p/original${movideFeatured.movies[currentSlide].logo}`;
+    slidesLogo.onclick = () => {
+      window.location.href = `/watch.html?title=${movideFeatured.movies[currentSlide].title}&id=${movideFeatured.movies[currentSlide].id}`;
+    };
+    //hide title
+    if (slidestitle) {
+      slidestitle.style.display = "none";
+    }
+  } else {
+    if (slidesLogo) {
+      slidesLogo.style.display = "none";
+    }
+  }
+  console.log(movideFeatured.movies[currentSlide].logo);
 
   if (slidestitle && slidesDescription && slidesReleaseDate && slidesRating) {
     if (slideData) {
@@ -505,7 +572,6 @@ function displayMovieTo(carouselContainer: HTMLElement, movie: any) {
     if (movieInfoRating) {
       movieInfoRating.textContent = movie.vote_average.toFixed(1);
       movieInfoTitle.textContent = movie.original_title;
-      console.log(movieInfoTitle.textContent);
     }
     //image href to watch page
     if (title) {

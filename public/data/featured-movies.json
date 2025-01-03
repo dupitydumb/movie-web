@@ -1,0 +1,36 @@
+{
+  "movies": [
+    {
+      "id": 402431,
+      "title": "Wicked"
+    },
+    {
+      "id": 1184918,
+      "title": "The Wild Robot"
+    },
+    {
+      "id": 872585,
+      "title": "Oppenheimer"
+    },
+    {
+      "id": 334541,
+      "title": "Manchester by the Sea"
+    },
+    {
+      "id": 491584,
+      "title": "Burning"
+    },
+    {
+      "id": 496243,
+      "title": "Parasite"
+    },
+    {
+      "id": 372058,
+      "title": "Your Name"
+    },
+    {
+      "id": 12477,
+      "title": "Grave of the Fireflies"
+    }
+  ]
+}
